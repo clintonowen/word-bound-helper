@@ -7,9 +7,7 @@ import './words-form.css';
 
 export class WordsForm extends Component {
   onSubmit (values) {
-    let { wordLength, possLetters, inclLetters, corrLetters } = values;
-    const query = { wordLength, possLetters, inclLetters, corrLetters };
-    return this.props.dispatch(fetchWords(query));
+    return this.props.dispatch(fetchWords(values));
   }
 
   render () {
@@ -46,19 +44,27 @@ export class WordsForm extends Component {
           validate={[required, nonEmpty]}
         />
         <Field
-          id='inclLetters'
-          label='Included Letters'
-          component={Input}
-          type='text'
-          name='inclLetters'
-          // validate={[]}
-        />
-        <Field
           id='corrLetters'
           label='Correct Letters'
           component={Input}
           type='text'
           name='corrLetters'
+          // validate={[]}
+        />
+        <Field
+          id='corrPosition'
+          label='Correct Position'
+          component={Input}
+          type='text'
+          name='corrPosition'
+          // validate={[]}
+        />
+        <Field
+          id='incPosition'
+          label='Incorrect Position'
+          component={Input}
+          type='text'
+          name='incPosition'
           // validate={[]}
         />
         <button
