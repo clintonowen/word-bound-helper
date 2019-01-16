@@ -1,68 +1,152 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Word Bound Helper
+<!-- > Get organized. Stay focused. Do more. -->
 
-## Available Scripts
+<!-- [![NPM Version][npm-image]][npm-url] -->
+<!-- [![Build Status](https://travis-ci.org/clintonowen/kando-mvp-client.svg?branch=master)](https://travis-ci.org/clintonowen/kando-mvp-client) -->
+<!-- [![Downloads Stats][npm-downloads]][npm-url] -->
 
-In the project directory, you can run:
+<!-- ## [Live App](https://kando-mvp.herokuapp.com) -->
+<!-- ( Test Account: &nbsp; **testuser** &nbsp; / &nbsp; **password** ) -->
 
-### `npm start`
+This is a tool to help solve word puzzles for the popluar iOS and Android game, Word Bound.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<!-- ![](images/screenshot-5.png) -->
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+<!-- ## Installation
 
-### `npm test`
+OS X & Linux:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+npm install my-crazy-module --save
+```
 
-### `npm run build`
+Windows:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+edit autoexec.bat
+``` -->
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+<!-- ## Usage example
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots. -->
 
-### `npm run eject`
+<!-- _For more examples and usage, please refer to the [Wiki][wiki]._ -->
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<!-- ## Technology Stack
+**Front End**:
+* React (via [create-react-app](https://github.com/facebook/create-react-app)), React Router
+* Redux, Redux Thunk, Redux Form
+* React DnD, React Responsive, React Swipeable Views, Moment.js
+* JavaScript
+* HTML, CSS
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Back End** ([Server GitHub Repo](https://github.com/clintonowen/kando-mvp-server))
+* Node
+* Express
+* Passport, bcrypt (Local & JWT Authentication)
+* Mongoose
+* Mocha, Chai (Testing)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Database**
+* MongoDB
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**CICD**
+* Mocha, Chai
+* TravisCI
+* Heroku -->
 
-## Learn More
+<!-- ## Main Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+kando-mvp-client/
+├── node_modules/ (see "Development Setup")
+├── public/
+│   └── index.html (static markup)
+├── src/
+│   ├── actions/
+│   ├── components/
+│   │   └── App.js (top-level component)
+│   ├── reducers/
+│   ├── index.js (renders `App` to index.html)
+│   └── store.js (Redux store)
+├── LICENSE (GNU GPLv3)
+├── package.json (NPM dependencies)
+└── README.md
+``` -->
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- ## Development setup
 
-### Code Splitting
+To clone the repo to your local development environment and verify that the test-suite passes, execute the following commands (requires [Node](https://nodejs.org)).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```sh
+# Clone the repo
+git clone https://github.com/clintonowen/kando-mvp-client.git
 
-### Analyzing the Bundle Size
+# Move into the project directory
+cd kando-mvp-client
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+# Install dependencies (in /node_modules/)
+npm i
 
-### Making a Progressive Web App
+# Run the test-suite:
+npm test
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+# Run the app:
+npm start
+``` -->
 
-### Advanced Configuration
+<!-- ## Release History
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+* 0.2.1
+    * CHANGE: Update docs (module code remains unchanged)
+* 0.2.0
+    * CHANGE: Remove `setDefaultXYZ()`
+    * ADD: Add `init()`
+* 0.1.1
+    * FIX: Crash when calling `baz()` (Thanks @GenerousContributorName!)
+* 0.1.0
+    * The first proper release
+    * CHANGE: Rename `foo()` to `bar()`
+* 0.0.1
+    * Work in progress -->
 
-### Deployment
+<!-- ## Contributing
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+1. Fork it (<https://github.com/yourname/yourproject/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request -->
 
-### `npm run build` fails to minify
+## Meta
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+by Clinton Owen – [@CoderClint](https://twitter.com/CoderClint) │ clint@clintonowen.com │ [https://github.com/clintonowen](https://github.com/clintonowen)
+
+Distributed under the GNU GPLv3 License. See ``LICENSE`` for more information.
+
+<!-- ## Additional Screenshots
+
+### Landing Page:
+![](images/screenshot-1.png)
+### Login Screen:
+![](images/screenshot-2.png)
+### Signup Form:
+![](images/screenshot-3.png)
+### Main KanDo Board:
+![](images/screenshot-4.png)
+### Board + Timer:
+![](images/screenshot-5.png)
+### Mobile View:
+![](images/screenshot-6.png)
+### Mobile Swiping:
+![](images/screenshot-7.png)
+### Mobile Timer Closed:
+![](images/screenshot-8.png) -->
+
+<!-- Markdown link & img dfn's -->
+[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/datadog-metrics
+[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
+[wiki]: https://github.com/yourname/yourproject/wiki

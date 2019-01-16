@@ -1,11 +1,17 @@
 {
   "name": "word-bound-helper",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "A tool to help solve puzzles in Word Bound.",
+  "author": "Clinton Owen <clint@clintonowen.com>",
+  "license": "GNU GPLv3",
   "private": true,
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.3"
+    "react-redux": "^6.0.0",
+    "react-scripts": "2.1.3",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
