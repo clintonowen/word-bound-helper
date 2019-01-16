@@ -26,8 +26,9 @@ export class WordsForm extends Component {
           type='text'
           name='wordLength'
           validate={[required, nonEmpty]}
+          placeholder='Choose word length'
         >
-          <option />
+          <option value='' disabled>Choose word length</option>
           <option value='2'>2</option>
           <option value='3'>3</option>
           <option value='4'>4</option>
