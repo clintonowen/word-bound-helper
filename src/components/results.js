@@ -12,7 +12,7 @@ class Results extends Component {
       );
     });
     let count = (this.props.words.length > 0)
-      ? (<p>{this.props.words.length} results:</p>)
+      ? (<p>{this.props.words.length} possible solutions:</p>)
       : null;
     return (
       <React.Fragment>
