@@ -2,7 +2,7 @@
 <!-- > Get organized. Stay focused. Do more. -->
 
 <!-- [![NPM Version][npm-image]][npm-url] -->
-<!-- [![Build Status](https://travis-ci.org/clintonowen/kando-mvp-client.svg?branch=master)](https://travis-ci.org/clintonowen/kando-mvp-client) -->
+[![Build Status](https://travis-ci.org/clintonowen/word-bound-helper-client.svg?branch=master)](https://travis-ci.org/clintonowen/word-bound-helper-client)
 <!-- [![Downloads Stats][npm-downloads]][npm-url] -->
 
 <!-- ## [Live App](https://kando-mvp.herokuapp.com) -->
