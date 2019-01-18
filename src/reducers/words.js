@@ -12,7 +12,7 @@ const initialState = {
 
 export default function reducer (state = initialState, action) {
   if (action.type === FETCH_WORDS_REQUEST) {
-    Object.assign(state, {
+    return Object.assign({}, state, {
       error: null,
       loading: true,
       words: []
@@ -20,7 +20,7 @@ export default function reducer (state = initialState, action) {
   }
   if (action.type === FETCH_WORDS_SUCCESS) {
     const { words } = action;
-    Object.assign(state, {
+    return Object.assign({}, state, {
       error: null,
       loading: false,
       words
@@ -28,7 +28,7 @@ export default function reducer (state = initialState, action) {
   }
   if (action.type === FETCH_WORDS_ERROR) {
     const { error } = action;
-    Object.assign(state, {
+    return Object.assign({}, state, {
       error,
       loading: false,
       words: []
