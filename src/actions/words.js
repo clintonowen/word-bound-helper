@@ -7,6 +7,36 @@ import {
   rankWords
 } from './utils';
 
+export const SET_WORD_LENGTH = 'SET_WORD_LENGTH';
+export const setWordLength = wordLength => ({
+  type: SET_WORD_LENGTH,
+  wordLength
+});
+
+export const SET_POSS_LETTERS = 'SET_POSS_LETTERS';
+export const setPossLetters = possLetters => ({
+  type: SET_POSS_LETTERS,
+  possLetters
+});
+
+export const SET_CORR_LETTERS = 'SET_CORR_LETTERS';
+export const setCorrLetters = corrLetters => ({
+  type: SET_CORR_LETTERS,
+  corrLetters
+});
+
+export const SET_CORR_POSITION = 'SET_CORR_POSITION';
+export const setCorrPosition = corrPosition => ({
+  type: SET_CORR_POSITION,
+  corrPosition
+});
+
+export const SET_INC_POSITION = 'SET_INC_POSITION';
+export const setIncPosition = incPosition => ({
+  type: SET_INC_POSITION,
+  incPosition
+});
+
 export const FETCH_WORDS_REQUEST = 'FETCH_WORDS_REQUEST';
 export const fetchWordsRequest = () => ({
   type: FETCH_WORDS_REQUEST
