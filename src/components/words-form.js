@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, getFormValues } from 'redux-form';
+import { Field, reduxForm, getFormValues, reset } from 'redux-form';
 import { updateSwipeIndex } from '../actions/app';
-import { setWordLength, setPossLetters } from '../actions/words';
+import { setWordLength, setPossLetters, clearWords } from '../actions/words';
 import './words-form.css';
 
-export class WordsForm extends Component {
+class WordsForm extends Component {
   componentWillReceiveProps (nextProps) {
     const nextValues = nextProps.values;
     const values = this.props.values;
@@ -14,8 +14,12 @@ export class WordsForm extends Component {
     }
   }
 
-  onSwipeClick (index) {
+  onNavClick (index, clear) {
     this.props.dispatch(updateSwipeIndex(index));
+    if (clear) {
+      this.props.dispatch(clearWords());
+      this.props.dispatch(reset('letters'));
+    }
   }
 
   onLengthClick (wordLength) {
@@ -25,8 +29,7 @@ export class WordsForm extends Component {
   render () {
     return (
       <React.Fragment>
-        <button onClick={() => this.onSwipeClick(0)}>Back</button>
-        <button onClick={() => this.onSwipeClick(2)}>Continue</button>
+        <button onClick={() => this.onNavClick(0, true)}>Start Over</button>
         <br />
         <p>Select word length:</p>
         <button onClick={() => this.onLengthClick('3')}>3</button>
@@ -46,9 +49,9 @@ export class WordsForm extends Component {
             component='input'
             type='text'
             name='possLetters'
-            initialstate={this.props.possLetters}
           />
         </form>
+        <button onClick={() => this.onNavClick(2)}>Continue</button>
       </React.Fragment>
     );
   }

@@ -6,7 +6,8 @@ import {
   SET_INC_POSITION,
   FETCH_WORDS_REQUEST,
   FETCH_WORDS_SUCCESS,
-  FETCH_WORDS_ERROR
+  FETCH_WORDS_ERROR,
+  CLEAR_WORDS
 } from '../actions/words';
 
 const initialState = {
@@ -17,7 +18,7 @@ const initialState = {
   corrLetters: null,
   corrPosition: null,
   incPosition: null,
-  words: []
+  words: null
 };
 
 export default function reducer (state = initialState, action) {
@@ -73,6 +74,9 @@ export default function reducer (state = initialState, action) {
       loading: false,
       words: []
     });
+  }
+  if (action.type === CLEAR_WORDS) {
+    return Object.assign({}, state, initialState);
   }
   return state;
 }

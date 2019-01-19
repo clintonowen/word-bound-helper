@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateSwipeIndex } from '../actions/app';
-import { fetchWords } from '../actions/words';
+import { fetchWords, clearWords } from '../actions/words';
 import { makeId } from '../actions/utils';
 import './results.css';
 
@@ -25,26 +25,28 @@ class Results extends Component {
     }
   }
 
-  onClick (index) {
-    this.props.dispatch(updateSwipeIndex(index));
+  onStartOverClick () {
+    this.props.dispatch(updateSwipeIndex(0));
+    this.props.dispatch(clearWords());
   }
 
   render () {
-    let results = this.props.words.map(word => {
-      const id = makeId();
-      return (
-        <li key={id}>{word}</li>
-      );
-    });
+    let results;
+    let count;
+    if (this.props.words) {
+      results = this.props.words.map(word => {
+        const id = makeId();
+        return (
+          <li key={id}>{word}</li>
+        );
+      });
 
-    let count = (this.props.words.length > 0)
-      ? (<p>{this.props.words.length} possible solutions:</p>)
-      : null;
+      count = (<p>{this.props.words.length} possible solutions</p>);
+    }
 
     return (
       <React.Fragment>
-        <button onClick={() => this.onClick(1)}>Back</button>
-        <button onClick={() => this.onClick(0)}>Start Over</button>
+        <button onClick={() => this.onStartOverClick()}>Start Over</button>
         {count}
         <ol className='results'>
           {results}

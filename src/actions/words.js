@@ -54,6 +54,11 @@ export const fetchWordsError = error => ({
   error
 });
 
+export const CLEAR_WORDS = 'CLEAR_WORDS';
+export const clearWords = () => ({
+  type: CLEAR_WORDS
+});
+
 export const fetchWords = data => dispatch => {
   dispatch(fetchWordsRequest());
   let {
