@@ -1,33 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateSwipeIndex } from '../actions/app';
-import { fetchWords, clearWords } from '../actions/words';
+import { fetchWords, clearWords, selectWord, deselectWord } from '../actions/words';
 import { makeId } from '../actions/utils';
 import './results.css';
 
 class Results extends Component {
   componentWillReceiveProps (nextProps) {
-    if (nextProps.wordLength && nextProps.possLetters &&
-      (nextProps.wordLength !== this.props.wordLength ||
-      nextProps.possLetters !== this.props.possLetters ||
-      nextProps.corrLetters !== this.props.corrLetters ||
-      nextProps.corrPosition !== this.props.corrPosition ||
-      nextProps.incPosition !== this.props.incPosition)) {
-      const values = {
-        wordLength: nextProps.wordLength,
-        possLetters: nextProps.possLetters,
-        corrLetters: nextProps.corrLetters,
-        corrPosition: nextProps.corrPosition,
-        incPosition: nextProps.incPosition
-      };
-
-      this.props.dispatch(fetchWords(values));
+    if (nextProps.query.wordLength && nextProps.query.possLetters &&
+      (Object.keys(nextProps.query).some(key => {
+        return nextProps.query[key] !== this.props.query[key];
+      }))) {
+      this.props.dispatch(fetchWords(nextProps.query));
     }
   }
 
   onStartOverClick () {
     this.props.dispatch(updateSwipeIndex(0));
     this.props.dispatch(clearWords());
+  }
+
+  handleSelectWord (word) {
+    this.props.dispatch(selectWord(word));
+  }
+
+  handleDeselectWord () {
+    this.props.dispatch(deselectWord());
   }
 
   render () {
@@ -37,16 +35,42 @@ class Results extends Component {
       results = this.props.words.map(word => {
         const id = makeId();
         return (
-          <li key={id}>{word}</li>
+          <li key={id}>
+            <button onClick={() => this.handleSelectWord(word)}>
+              {word}
+            </button>
+          </li>
         );
       });
 
       count = (<p>{this.props.words.length} possible solutions</p>);
     }
 
+    let selected = this.props.selectedWords.map(word => {
+      const id = makeId();
+      return (
+        <li key={id}>
+          {word}
+        </li>
+      );
+    });
+
+    let deselectButton;
+    if (selected.length > 0) {
+      deselectButton = (
+        <button onClick={() => this.handleDeselectWord()}>
+          Remove last word
+        </button>
+      );
+    }
+
     return (
       <React.Fragment>
         <button onClick={() => this.onStartOverClick()}>Start Over</button>
+        <ul>
+          {selected}
+        </ul>
+        {deselectButton}
         {count}
         <ol className='results'>
           {results}
@@ -57,12 +81,9 @@ class Results extends Component {
 }
 
 const mapStateToProps = state => ({
-  wordLength: state.words.wordLength,
-  possLetters: state.words.possLetters,
-  corrLetters: state.words.corrLetters,
-  corrPosition: state.words.corrPosition,
-  incPosition: state.words.incPosition,
-  words: state.words.words
+  query: state.words.query,
+  words: state.words.words,
+  selectedWords: state.words.selectedWords
 });
 
 export default connect(mapStateToProps)(Results);

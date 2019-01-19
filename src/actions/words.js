@@ -59,6 +59,17 @@ export const clearWords = () => ({
   type: CLEAR_WORDS
 });
 
+export const SELECT_WORD = 'SELECT_WORD';
+export const selectWord = word => ({
+  type: SELECT_WORD,
+  word
+});
+
+export const DESELECT_WORD = 'DESELECT_WORD';
+export const deselectWord = () => ({
+  type: DESELECT_WORD
+});
+
 export const fetchWords = data => dispatch => {
   dispatch(fetchWordsRequest());
   let {

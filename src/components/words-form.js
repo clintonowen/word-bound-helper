@@ -58,8 +58,8 @@ class WordsForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  wordLength: state.words.wordLength,
-  possLetters: state.words.possLetters,
+  wordLength: state.words.query.wordLength,
+  possLetters: state.words.query.possLetters,
   values: getFormValues('letters')(state)
 });
 
