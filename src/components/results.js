@@ -21,7 +21,13 @@ class Results extends Component {
   }
 
   handleSelectWord (word) {
-    this.props.dispatch(selectWord(word));
+    let wordArray = word.split('').map(letter => {
+      return {
+        letter,
+        color: null
+      };
+    });
+    this.props.dispatch(selectWord(wordArray));
   }
 
   handleDeselectWord () {
@@ -46,11 +52,23 @@ class Results extends Component {
       count = (<p>{this.props.words.length} possible solutions</p>);
     }
 
-    let selected = this.props.selectedWords.map(word => {
+    let selected = this.props.selectedWords.map(wordArray => {
+      const letters = wordArray.map(letter => {
+        const id = makeId();
+        return (
+          <select key={id}>
+            <option value='null'>{letter.letter.toUpperCase()}-blue</option>
+            <option value='orange'>{letter.letter.toUpperCase()}-orange</option>
+            <option value='green'>{letter.letter.toUpperCase()}-green</option>
+          </select>
+        );
+      });
       const id = makeId();
       return (
         <li key={id}>
-          {word}
+          <form>
+            {letters}
+          </form>
         </li>
       );
     });
