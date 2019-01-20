@@ -1,0 +1,42 @@
+#selected-words {
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
+#selected-words li {
+  margin-bottom: 2px;
+  position: relative;
+}
+
+.letter-picker {
+  display: inline-block;
+  position: relative;
+}
+
+.letter-picker button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.letter {
+  box-shadow: 0.5px 0.5px 1px rgb(90, 90, 90);
+  height: 30px;
+  margin-right: 5px;
+  width: 30px;
+}
+
+.letter-option {
+  bottom: -20px;
+  height: 20px;
+  position: absolute;
+  width: 20px;
+}
+
+.letter-option-left {
+  left: -6px;
+}
+
+.letter-option-right {
+  left: 16px;
+}

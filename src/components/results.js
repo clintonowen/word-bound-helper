@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateSwipeIndex } from '../actions/app';
-import { fetchWords, clearWords, selectWord, deselectWord } from '../actions/words';
+import { fetchWords, clearWords, selectWord, deselectWord, showLetterOptions, hideLetterOptions } from '../actions/words';
 import { makeId } from '../actions/utils';
 import './results.css';
 
@@ -24,7 +24,8 @@ class Results extends Component {
     let wordArray = word.split('').map(letter => {
       return {
         letter,
-        color: null
+        color: 'Blue',
+        showOptions: 'hidden'
       };
     });
     this.props.dispatch(selectWord(wordArray));
@@ -32,6 +33,14 @@ class Results extends Component {
 
   handleDeselectWord () {
     this.props.dispatch(deselectWord());
+  }
+
+  handleLetterHover (wordIndex, letterIndex) {
+    this.props.dispatch(showLetterOptions(wordIndex, letterIndex));
+  }
+
+  handleLetterLeave (wordIndex, letterIndex) {
+    this.props.dispatch(hideLetterOptions(wordIndex, letterIndex));
   }
 
   render () {
@@ -52,23 +61,36 @@ class Results extends Component {
       count = (<p>{this.props.words.length} possible solutions</p>);
     }
 
-    let selected = this.props.selectedWords.map(wordArray => {
-      const letters = wordArray.map(letter => {
+    let selected = this.props.selectedWords.map((wordArray, wordIndex) => {
+      const letters = wordArray.map((letter, letterIndex) => {
         const id = makeId();
         return (
-          <select key={id}>
-            <option value='null'>{letter.letter.toUpperCase()}-blue</option>
-            <option value='orange'>{letter.letter.toUpperCase()}-orange</option>
-            <option value='green'>{letter.letter.toUpperCase()}-green</option>
-          </select>
+          <div
+            key={id}
+            className='letter-picker'
+            onMouseEnter={() => this.handleLetterHover(wordIndex, letterIndex)}
+            onMouseLeave={() => this.handleLetterLeave(wordIndex, letterIndex)}>
+            <img
+              className='letter'
+              src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
+              alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
+            <img
+              className='letter-option letter-option-left'
+              src={`/img/letters-orange/${letter.letter.toUpperCase()}.png`}
+              alt={`Orange ${letter.letter.toUpperCase()}`}
+              style={{ visibility: `${letter.showOptions}` }} />
+            <img
+              className='letter-option letter-option-right'
+              src={`/img/letters-green/${letter.letter.toUpperCase()}.png`}
+              alt={`Green ${letter.letter.toUpperCase()}`}
+              style={{ visibility: `${letter.showOptions}` }} />
+          </div>
         );
       });
       const id = makeId();
       return (
         <li key={id}>
-          <form>
-            {letters}
-          </form>
+          {letters}
         </li>
       );
     });
@@ -85,7 +107,7 @@ class Results extends Component {
     return (
       <React.Fragment>
         <button onClick={() => this.onStartOverClick()}>Start Over</button>
-        <ul>
+        <ul id='selected-words'>
           {selected}
         </ul>
         {deselectButton}

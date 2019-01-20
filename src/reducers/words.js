@@ -9,7 +9,9 @@ import {
   FETCH_WORDS_ERROR,
   CLEAR_WORDS,
   SELECT_WORD,
-  DESELECT_WORD
+  DESELECT_WORD,
+  SHOW_LETTER_OPTIONS,
+  HIDE_LETTER_OPTIONS
 } from '../actions/words';
 
 const initialState = {
@@ -102,6 +104,44 @@ export default function reducer (state = initialState, action) {
   }
   if (action.type === DESELECT_WORD) {
     const selectedWords = state.selectedWords.slice(0, -1);
+    return Object.assign({}, state, {
+      selectedWords
+    });
+  }
+  if (action.type === SHOW_LETTER_OPTIONS) {
+    const { wordIndex, letterIndex } = action;
+
+    const letter = Object.assign({}, state.selectedWords[wordIndex][letterIndex], {
+      showOptions: 'visible'
+    });
+
+    const word = (letterIndex > 0)
+      ? state.selectedWords[wordIndex].slice(0, letterIndex).concat(letter).concat(state.selectedWords[wordIndex].slice(letterIndex + 1))
+      : [letter].concat(state.selectedWords[wordIndex].slice(1));
+
+    const selectedWords = (wordIndex > 0)
+      ? state.selectedWords.slice(0, wordIndex).concat(word).concat(state.selectedWords.slice(wordIndex + 1))
+      : [word].concat(state.selectedWords.slice(1));
+
+    return Object.assign({}, state, {
+      selectedWords
+    });
+  }
+  if (action.type === HIDE_LETTER_OPTIONS) {
+    const { wordIndex, letterIndex } = action;
+
+    const letter = Object.assign({}, state.selectedWords[wordIndex][letterIndex], {
+      showOptions: 'hidden'
+    });
+
+    const word = (letterIndex > 0)
+      ? state.selectedWords[wordIndex].slice(0, letterIndex).concat(letter).concat(state.selectedWords[wordIndex].slice(letterIndex + 1))
+      : [letter].concat(state.selectedWords[wordIndex].slice(1));
+
+    const selectedWords = (wordIndex > 0)
+      ? state.selectedWords.slice(0, wordIndex).concat(word).concat(state.selectedWords.slice(wordIndex + 1))
+      : [word].concat(state.selectedWords.slice(1));
+
     return Object.assign({}, state, {
       selectedWords
     });

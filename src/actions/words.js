@@ -70,6 +70,20 @@ export const deselectWord = () => ({
   type: DESELECT_WORD
 });
 
+export const SHOW_LETTER_OPTIONS = 'SHOW_LETTER_OPTIONS';
+export const showLetterOptions = (wordIndex, letterIndex) => ({
+  type: SHOW_LETTER_OPTIONS,
+  wordIndex,
+  letterIndex
+});
+
+export const HIDE_LETTER_OPTIONS = 'HIDE_LETTER_OPTIONS';
+export const hideLetterOptions = (wordIndex, letterIndex) => ({
+  type: HIDE_LETTER_OPTIONS,
+  wordIndex,
+  letterIndex
+});
+
 export const fetchWords = data => dispatch => {
   dispatch(fetchWordsRequest());
   let {
