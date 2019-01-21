@@ -79,7 +79,7 @@ export const hasOnlyPossLetters = (word, letters) => {
 };
 
 export const includesLetters = (word, letters) => {
-  if (!letters) {
+  if (letters.length === 0) {
     return true;
   }
   for (let i = 0; i < letters.length; i++) {
@@ -94,7 +94,7 @@ export const includesLetters = (word, letters) => {
 };
 
 export const hasLettersInPosition = (word, letters) => {
-  if (!letters) {
+  if (letters.length === 0) {
     return true;
   }
   for (let i = 0; i < letters.length; i++) {
@@ -106,7 +106,7 @@ export const hasLettersInPosition = (word, letters) => {
 };
 
 export const hasNoWrongLetters = (word, letters) => {
-  if (!letters) {
+  if (letters.length === 0) {
     return true;
   }
   let result = true;

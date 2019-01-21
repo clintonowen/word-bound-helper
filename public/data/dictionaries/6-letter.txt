@@ -14,7 +14,6 @@ abator
 abbess
 abbeys
 abbots
-abduce
 abduct
 abears
 abhors

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateSwipeIndex } from '../actions/app';
-import { fetchWords, clearWords, selectWord, deselectWord, showLetterOptions, hideLetterOptions } from '../actions/words';
+import { fetchWords, clearWords, selectWord, deselectWord, toggleLetterOptions, setLetterColor } from '../actions/words';
 import { makeId } from '../actions/utils';
 import './results.css';
 
@@ -10,8 +10,9 @@ class Results extends Component {
     if (nextProps.query.wordLength && nextProps.query.possLetters &&
       (Object.keys(nextProps.query).some(key => {
         return nextProps.query[key] !== this.props.query[key];
-      }))) {
-      this.props.dispatch(fetchWords(nextProps.query));
+      }) || nextProps.selectedWords !== this.props.selectedWords)) {
+      // console.log('Dispatching `fetchWords`.');
+      this.props.dispatch(fetchWords(nextProps.query, nextProps.selectedWords));
     }
   }
 
@@ -35,12 +36,14 @@ class Results extends Component {
     this.props.dispatch(deselectWord());
   }
 
-  handleLetterHover (wordIndex, letterIndex) {
-    this.props.dispatch(showLetterOptions(wordIndex, letterIndex));
+  handleToggleOptions (wordIndex, letterIndex) {
+    this.props.dispatch(toggleLetterOptions(wordIndex, letterIndex));
   }
 
-  handleLetterLeave (wordIndex, letterIndex) {
-    this.props.dispatch(hideLetterOptions(wordIndex, letterIndex));
+  handleSelectColor (color, wordIndex, letterIndex) {
+    this.props.dispatch(setLetterColor(color, wordIndex, letterIndex));
+    this.props.dispatch(toggleLetterOptions(wordIndex, letterIndex));
+    // this.props.dispatch(fetchWords(this.props.query, this.props.selectedWords));
   }
 
   render () {
@@ -64,26 +67,39 @@ class Results extends Component {
     let selected = this.props.selectedWords.map((wordArray, wordIndex) => {
       const letters = wordArray.map((letter, letterIndex) => {
         const id = makeId();
+        const optionColors = ['Blue', 'Orange', 'Green'].filter(color => {
+          return color !== letter.color;
+        });
+        const options = (
+          <React.Fragment>
+            <button onClick={() => this.handleSelectColor(optionColors[0], wordIndex, letterIndex)}>
+              <img
+                className='letter-option letter-option-left'
+                src={`/img/letters-${optionColors[0].toLowerCase()}/${letter.letter.toUpperCase()}.png`}
+                alt={`${optionColors[0]} ${letter.letter.toUpperCase()}`}
+                style={{ visibility: `${letter.showOptions}` }} />
+            </button>
+            <button onClick={() => this.handleSelectColor(optionColors[1], wordIndex, letterIndex)}>
+              <img
+                className='letter-option letter-option-right'
+                src={`/img/letters-${optionColors[1].toLowerCase()}/${letter.letter.toUpperCase()}.png`}
+                alt={`${optionColors[1]} ${letter.letter.toUpperCase()}`}
+                style={{ visibility: `${letter.showOptions}` }} />
+            </button>
+          </React.Fragment>
+        );
         return (
           <div
             key={id}
             className='letter-picker'
-            onMouseEnter={() => this.handleLetterHover(wordIndex, letterIndex)}
-            onMouseLeave={() => this.handleLetterLeave(wordIndex, letterIndex)}>
-            <img
-              className='letter'
-              src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
-              alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
-            <img
-              className='letter-option letter-option-left'
-              src={`/img/letters-orange/${letter.letter.toUpperCase()}.png`}
-              alt={`Orange ${letter.letter.toUpperCase()}`}
-              style={{ visibility: `${letter.showOptions}` }} />
-            <img
-              className='letter-option letter-option-right'
-              src={`/img/letters-green/${letter.letter.toUpperCase()}.png`}
-              alt={`Green ${letter.letter.toUpperCase()}`}
-              style={{ visibility: `${letter.showOptions}` }} />
+          >
+            <button onClick={() => this.handleToggleOptions(wordIndex, letterIndex)}>
+              <img
+                className='letter'
+                src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
+                alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
+            </button>
+            {options}
           </div>
         );
       });

@@ -1,17 +1,14 @@
 import {
   SET_WORD_LENGTH,
   SET_POSS_LETTERS,
-  SET_CORR_LETTERS,
-  SET_CORR_POSITION,
-  SET_INC_POSITION,
   FETCH_WORDS_REQUEST,
   FETCH_WORDS_SUCCESS,
   FETCH_WORDS_ERROR,
   CLEAR_WORDS,
   SELECT_WORD,
   DESELECT_WORD,
-  SHOW_LETTER_OPTIONS,
-  HIDE_LETTER_OPTIONS
+  TOGGLE_LETTER_OPTIONS,
+  SET_LETTER_COLOR
 } from '../actions/words';
 
 const initialState = {
@@ -19,10 +16,7 @@ const initialState = {
   loading: false,
   query: {
     wordLength: null,
-    possLetters: null,
-    corrLetters: null,
-    corrPosition: null,
-    incPosition: null
+    possLetters: null
   },
   words: null,
   selectedWords: []
@@ -42,30 +36,6 @@ export default function reducer (state = initialState, action) {
     return Object.assign({}, state, {
       query: Object.assign({}, state.query, {
         possLetters
-      })
-    });
-  }
-  if (action.type === SET_CORR_LETTERS) {
-    const { corrLetters } = action;
-    return Object.assign({}, state, {
-      query: Object.assign({}, state.query, {
-        corrLetters
-      })
-    });
-  }
-  if (action.type === SET_CORR_POSITION) {
-    const { corrPosition } = action;
-    return Object.assign({}, state, {
-      query: Object.assign({}, state.query, {
-        corrPosition
-      })
-    });
-  }
-  if (action.type === SET_INC_POSITION) {
-    const { incPosition } = action;
-    return Object.assign({}, state, {
-      query: Object.assign({}, state.query, {
-        incPosition
       })
     });
   }
@@ -108,40 +78,58 @@ export default function reducer (state = initialState, action) {
       selectedWords
     });
   }
-  if (action.type === SHOW_LETTER_OPTIONS) {
+  if (action.type === TOGGLE_LETTER_OPTIONS) {
     const { wordIndex, letterIndex } = action;
 
-    const letter = Object.assign({}, state.selectedWords[wordIndex][letterIndex], {
-      showOptions: 'visible'
+    // Hide options for all letters
+    let word = state.selectedWords[wordIndex].map(letter => {
+      return Object.assign({}, letter, {
+        showOptions: 'hidden'
+      });
     });
 
-    const word = (letterIndex > 0)
-      ? state.selectedWords[wordIndex].slice(0, letterIndex).concat(letter).concat(state.selectedWords[wordIndex].slice(letterIndex + 1))
-      : [letter].concat(state.selectedWords[wordIndex].slice(1));
+    // If options were hidden for selected letter, make them visible
+    let currentSetting = state.selectedWords[wordIndex][letterIndex].showOptions;
+    if (currentSetting === 'hidden') {
+      const letter = Object.assign({}, state.selectedWords[wordIndex][letterIndex], {
+        showOptions: 'visible'
+      });
 
+      // Reinsert toggled letter into parent word
+      word = (letterIndex > 0)
+        ? word.slice(0, letterIndex).concat(letter).concat(word.slice(letterIndex + 1))
+        : [letter].concat(word.slice(1));
+    }
+
+    // Reinsert updated word into `selectedWords` array
     const selectedWords = (wordIndex > 0)
-      ? state.selectedWords.slice(0, wordIndex).concat(word).concat(state.selectedWords.slice(wordIndex + 1))
+      ? state.selectedWords.slice(0, wordIndex).concat([word]).concat(state.selectedWords.slice(wordIndex + 1))
       : [word].concat(state.selectedWords.slice(1));
 
+    // Assign updated `selectedWords` to state
     return Object.assign({}, state, {
       selectedWords
     });
   }
-  if (action.type === HIDE_LETTER_OPTIONS) {
-    const { wordIndex, letterIndex } = action;
+  if (action.type === SET_LETTER_COLOR) {
+    const { color, wordIndex, letterIndex } = action;
 
+    // Set new letter color
     const letter = Object.assign({}, state.selectedWords[wordIndex][letterIndex], {
-      showOptions: 'hidden'
+      color
     });
 
+    // Reinsert letter into parent word
     const word = (letterIndex > 0)
       ? state.selectedWords[wordIndex].slice(0, letterIndex).concat(letter).concat(state.selectedWords[wordIndex].slice(letterIndex + 1))
       : [letter].concat(state.selectedWords[wordIndex].slice(1));
 
+    // Reinsert updated word into `selectedWords` array
     const selectedWords = (wordIndex > 0)
-      ? state.selectedWords.slice(0, wordIndex).concat(word).concat(state.selectedWords.slice(wordIndex + 1))
+      ? state.selectedWords.slice(0, wordIndex).concat([word]).concat(state.selectedWords.slice(wordIndex + 1))
       : [word].concat(state.selectedWords.slice(1));
 
+    // Assign updated `selectedWords` to state
     return Object.assign({}, state, {
       selectedWords
     });

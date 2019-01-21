@@ -19,24 +19,6 @@ export const setPossLetters = possLetters => ({
   possLetters
 });
 
-export const SET_CORR_LETTERS = 'SET_CORR_LETTERS';
-export const setCorrLetters = corrLetters => ({
-  type: SET_CORR_LETTERS,
-  corrLetters
-});
-
-export const SET_CORR_POSITION = 'SET_CORR_POSITION';
-export const setCorrPosition = corrPosition => ({
-  type: SET_CORR_POSITION,
-  corrPosition
-});
-
-export const SET_INC_POSITION = 'SET_INC_POSITION';
-export const setIncPosition = incPosition => ({
-  type: SET_INC_POSITION,
-  incPosition
-});
-
 export const FETCH_WORDS_REQUEST = 'FETCH_WORDS_REQUEST';
 export const fetchWordsRequest = () => ({
   type: FETCH_WORDS_REQUEST
@@ -70,29 +52,31 @@ export const deselectWord = () => ({
   type: DESELECT_WORD
 });
 
-export const SHOW_LETTER_OPTIONS = 'SHOW_LETTER_OPTIONS';
-export const showLetterOptions = (wordIndex, letterIndex) => ({
-  type: SHOW_LETTER_OPTIONS,
+export const TOGGLE_LETTER_OPTIONS = 'TOGGLE_LETTER_OPTIONS';
+export const toggleLetterOptions = (wordIndex, letterIndex) => ({
+  type: TOGGLE_LETTER_OPTIONS,
   wordIndex,
   letterIndex
 });
 
-export const HIDE_LETTER_OPTIONS = 'HIDE_LETTER_OPTIONS';
-export const hideLetterOptions = (wordIndex, letterIndex) => ({
-  type: HIDE_LETTER_OPTIONS,
+export const SET_LETTER_COLOR = 'SET_LETTER_COLOR';
+export const setLetterColor = (color, wordIndex, letterIndex) => ({
+  type: SET_LETTER_COLOR,
+  color,
   wordIndex,
   letterIndex
 });
 
-export const fetchWords = data => dispatch => {
+export const fetchWords = (query, selectedWords) => dispatch => {
   dispatch(fetchWordsRequest());
   let {
     wordLength,
-    possLetters,
-    corrLetters,
-    corrPosition,
-    incPosition
-  } = data;
+    possLetters
+  } = query;
+  let corrLetters = [];
+  let corrPosition = '';
+  let incPosition = [];
+  let incLetterAndPos = [];
   let results = [];
 
   // Validate inputs
@@ -105,17 +89,51 @@ export const fetchWords = data => dispatch => {
     const err = new Error('Missing Possible Letters');
     err.status = 400;
     dispatch(fetchWordsError(err));
-  } else {
-    possLetters = possLetters.toLowerCase();
   }
-  if (corrLetters) {
-    corrLetters = corrLetters.toLowerCase();
-  }
-  if (corrPosition) {
-    corrPosition = corrPosition.toLowerCase();
-  }
-  if (incPosition) {
-    incPosition = incPosition.toLowerCase().replace(/\s/g, '').split(',');
+
+  // Check selected word history
+  if (selectedWords && selectedWords.length !== 0) {
+    // Check only last selected word for `corrLetters` and `corrPosition`
+    selectedWords[selectedWords.length - 1].forEach(letter => {
+      if (letter.color === 'Orange' || letter.color === 'Green') {
+        if (!corrLetters.includes(letter.letter)) {
+          corrLetters.push(letter.letter);
+        }
+      }
+      if (letter.color === 'Blue' || letter.color === 'Orange') {
+        corrPosition += '*';
+      }
+      if (letter.color === 'Green') {
+        corrPosition += letter.letter.toLowerCase();
+      }
+    });
+
+    // Check all selected words for `possLetters` and `incPosition`
+    selectedWords.forEach(word => {
+      let thisIncPosition = '';
+      let thisIncLetterAndPos = '';
+      word.forEach(letter => {
+        const color = letter.color;
+        letter = letter.letter.toLowerCase();
+        if (color === 'Blue') {
+          if (!corrLetters.includes(letter)) {
+            possLetters = possLetters.filter(possLetter => possLetter !== letter);
+          }
+          thisIncPosition += '*';
+          thisIncLetterAndPos += letter;
+        }
+        if (color === 'Orange') {
+          thisIncPosition += letter;
+          thisIncLetterAndPos += '*';
+        }
+        if (color === 'Green') {
+          thisIncPosition += '*';
+          thisIncLetterAndPos += '*';
+        }
+      });
+      incPosition.push(thisIncPosition);
+      incLetterAndPos.push(thisIncLetterAndPos);
+    });
   }
 
   loadDictionary(wordLength)
@@ -124,7 +142,8 @@ export const fetchWords = data => dispatch => {
         if (hasOnlyPossLetters(word, possLetters) &&
           includesLetters(word, corrLetters) &&
           hasLettersInPosition(word, corrPosition) &&
-          hasNoWrongLetters(word, incPosition)) {
+          hasNoWrongLetters(word, incPosition) &&
+          hasNoWrongLetters(word, incLetterAndPos)) {
           // console.log(word);
           results.push(word);
         }

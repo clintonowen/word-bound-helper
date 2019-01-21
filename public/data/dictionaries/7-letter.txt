@@ -201,7 +201,6 @@ adeptly
 adhered
 adherer
 adheres
-adhorns
 adipoid
 adipoma
 adipose
@@ -1609,7 +1608,6 @@ blocker
 blogged
 blogger
 blokier
-blokish
 blonder
 blondes
 blooded
@@ -8456,6 +8454,7 @@ liriope
 lirking
 lispers
 lisping
+lissome
 listens
 listful
 listing
