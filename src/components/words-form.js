@@ -1,83 +1,86 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, focus } from 'redux-form';
-import { fetchWords } from '../actions/words';
-import Input from './input';
-import { required, nonEmpty } from '../validators';
+import { connect } from 'react-redux';
+import { Field, reduxForm, getFormValues, reset } from 'redux-form';
+import { updateSwipeIndex } from '../actions/app';
+import { setWordLength, setPossLetters, clearWords } from '../actions/words';
+import { makeId } from '../actions/utils';
 import './words-form.css';
 
-export class WordsForm extends Component {
-  onSubmit (values) {
-    return this.props.dispatch(fetchWords(values));
+class WordsForm extends Component {
+  onSubmit (event) {
+    event.preventDefault();
+  }
+
+  onNavClick (index, clear) {
+    const { wordLength } = this.props;
+    if (wordLength && this.props.values && this.props.values.possLetters && !clear) {
+      const possLetters = this.props.values.possLetters.replace(/[^a-zA-Z]+/g, '').toLowerCase().split('');
+      this.props.dispatch(setPossLetters(possLetters));
+      this.props.dispatch(updateSwipeIndex(index));
+    } else if (clear) {
+      this.props.dispatch(updateSwipeIndex(index));
+      this.props.dispatch(clearWords());
+      this.props.dispatch(reset('letters'));
+    }
+  }
+
+  onLengthClick (wordLength) {
+    this.props.dispatch(setWordLength(wordLength));
   }
 
   render () {
+    let numbers = [];
+    for (let i = 3; i <= 7; i++) {
+      let id = makeId();
+      let color = 'Blue';
+      if (`${i}` === this.props.wordLength) {
+        color = 'Orange';
+      }
+      numbers.push((
+        <div key={id} className='number-picker'>
+          <button
+            onClick={() => this.onLengthClick(`${i}`)}
+          >
+            <img
+              className='number-option'
+              src={`/img/numbers-${color.toLowerCase()}/${i}.png`}
+              alt={`${color} ${i}`}
+            />
+          </button>
+        </div>
+      ));
+    }
     return (
-      <form
-        className='words-form'
-        onSubmit={this.props.handleSubmit(values =>
-          this.onSubmit(values)
-        )}>
-        <label htmlFor='wordLength'>Word Length</label>
-        <Field
-          id='wordLength'
-          component='select'
-          type='text'
-          name='wordLength'
-          validate={[required, nonEmpty]}
-          placeholder='Choose word length'
+      <React.Fragment>
+        <button onClick={() => this.onNavClick(0, true)}>Start Over</button>
+        <br />
+        <p>Select word length:</p>
+        {numbers}
+        <p>Enter available letters:</p>
+        <form
+          className='words-form'
+          onSubmit={e => this.onSubmit(e)}
         >
-          <option value='' disabled>Choose word length</option>
-          <option value='2'>2</option>
-          <option value='3'>3</option>
-          <option value='4'>4</option>
-          <option value='5'>5</option>
-          <option value='6'>6</option>
-          <option value='7'>7</option>
-          <option value='8'>8</option>
-        </Field>
-        <Field
-          id='possLetters'
-          label='Possible Letters'
-          component={Input}
-          type='text'
-          name='possLetters'
-          validate={[required, nonEmpty]}
-        />
-        <Field
-          id='corrLetters'
-          label='Correct Letters'
-          component={Input}
-          type='text'
-          name='corrLetters'
-          // validate={[]}
-        />
-        <Field
-          id='corrPosition'
-          label='Correct Position'
-          component={Input}
-          type='text'
-          name='corrPosition'
-          // validate={[]}
-        />
-        <Field
-          id='incPosition'
-          label='Incorrect Position'
-          component={Input}
-          type='text'
-          name='incPosition'
-          // validate={[]}
-        />
-        <button
-          type='submit'
-          disabled={!this.props.valid || this.props.submitting}>
-          Submit
-        </button>
-      </form>
+          <Field
+            id='possLetters'
+            label='Possible Letters'
+            component='input'
+            type='text'
+            name='possLetters'
+          />
+        </form>
+        <button onClick={() => this.onNavClick(2)}>Continue</button>
+      </React.Fragment>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  wordLength: state.words.query.wordLength,
+  possLetters: state.words.query.possLetters,
+  values: getFormValues('letters')(state)
+});
+
 export default reduxForm({
-  form: 'words',
-  onSubmitFail: (errors, dispatch) => dispatch(focus('words', Object.keys(errors)[0]))
-})(WordsForm);
+  form: 'letters'
+})(connect(mapStateToProps)(WordsForm));

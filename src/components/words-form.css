@@ -1,0 +1,18 @@
+.number-picker {
+  display: inline-block;
+  position: relative;
+}
+
+.number-picker button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.number-option {
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
+  filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
+  height: 30px;
+  margin-right: 5px;
+  width: 30px;
+}
