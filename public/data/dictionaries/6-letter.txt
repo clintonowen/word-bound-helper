@@ -2529,7 +2529,6 @@ divine
 diving
 divots
 diynal
-diynes
 djembe
 djubed
 doable
@@ -4489,7 +4488,6 @@ inmixt
 inmost
 innate
 inning
-inodes
 inputs
 inroad
 inrush

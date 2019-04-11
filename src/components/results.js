@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateSwipeIndex } from '../actions/app';
-import { fetchWords, clearWords, selectWord, deselectWord, toggleLetterOptions, setLetterColor } from '../actions/words';
+import { fetchWords, clearWords } from '../actions/words';
 import { makeId } from '../actions/utils';
 import './results.css';
 
 class Results extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      selectedWords: []
+    };
+  }
+
   componentWillReceiveProps (nextProps) {
     if (nextProps.query.wordLength && nextProps.query.possLetters &&
-      (Object.keys(nextProps.query).some(key => {
+      Object.keys(nextProps.query).some(key => {
         return nextProps.query[key] !== this.props.query[key];
-      }) || nextProps.selectedWords !== this.props.selectedWords)) {
+      })) {
       // console.log('Dispatching `fetchWords`.');
-      this.props.dispatch(fetchWords(nextProps.query, nextProps.selectedWords));
+      this.props.dispatch(fetchWords(nextProps.query, this.state.selectedWords));
     }
   }
 
@@ -29,21 +36,69 @@ class Results extends Component {
         showOptions: 'hidden'
       };
     });
-    this.props.dispatch(selectWord(wordArray));
+    const selectedWords = [...this.state.selectedWords, wordArray];
+    this.setState({
+      selectedWords
+    });
   }
 
   handleDeselectWord () {
-    this.props.dispatch(deselectWord());
+    const selectedWords = this.state.selectedWords.slice(0, -1);
+    this.setState({
+      selectedWords
+    });
+    // Fetch an updated list of words
+    this.props.dispatch(fetchWords(this.props.query, selectedWords));
   }
 
   handleToggleOptions (wordIndex, letterIndex) {
-    this.props.dispatch(toggleLetterOptions(wordIndex, letterIndex));
+    // Hide options for all letters
+    let word = this.state.selectedWords[wordIndex].map(letter => {
+      return Object.assign({}, letter, {
+        showOptions: 'hidden'
+      });
+    });
+    // If options were hidden for selected letter, make them visible
+    let currentSetting = this.state.selectedWords[wordIndex][letterIndex].showOptions;
+    if (currentSetting === 'hidden') {
+      const letter = Object.assign({}, this.state.selectedWords[wordIndex][letterIndex], {
+        showOptions: 'visible'
+      });
+      // Reinsert toggled letter into parent word
+      word = (letterIndex > 0)
+        ? word.slice(0, letterIndex).concat(letter).concat(word.slice(letterIndex + 1))
+        : [letter].concat(word.slice(1));
+    }
+    // Reinsert updated word into `selectedWords` array
+    const selectedWords = (wordIndex > 0)
+      ? this.state.selectedWords.slice(0, wordIndex).concat([word]).concat(this.state.selectedWords.slice(wordIndex + 1))
+      : [word].concat(this.state.selectedWords.slice(1));
+    // Assign updated `selectedWords` to state
+    this.setState({
+      selectedWords
+    });
   }
 
   handleSelectColor (color, wordIndex, letterIndex) {
-    this.props.dispatch(setLetterColor(color, wordIndex, letterIndex));
-    this.props.dispatch(toggleLetterOptions(wordIndex, letterIndex));
-    // this.props.dispatch(fetchWords(this.props.query, this.props.selectedWords));
+    // Set new letter color
+    const letter = Object.assign({}, this.state.selectedWords[wordIndex][letterIndex], {
+      color,
+      showOptions: 'hidden'
+    });
+    // Reinsert letter into parent word
+    const word = (letterIndex > 0)
+      ? this.state.selectedWords[wordIndex].slice(0, letterIndex).concat(letter).concat(this.state.selectedWords[wordIndex].slice(letterIndex + 1))
+      : [letter].concat(this.state.selectedWords[wordIndex].slice(1));
+    // Reinsert updated word into `selectedWords` array
+    const selectedWords = (wordIndex > 0)
+      ? this.state.selectedWords.slice(0, wordIndex).concat([word]).concat(this.state.selectedWords.slice(wordIndex + 1))
+      : [word].concat(this.state.selectedWords.slice(1));
+    // Assign updated `selectedWords` to state
+    this.setState({
+      selectedWords
+    });
+    // Fetch an updated list of words
+    this.props.dispatch(fetchWords(this.props.query, selectedWords));
   }
 
   render () {
@@ -64,7 +119,7 @@ class Results extends Component {
       count = (<p>{this.props.words.length} possible solutions</p>);
     }
 
-    let selected = this.props.selectedWords.map((wordArray, wordIndex) => {
+    let selected = this.state.selectedWords.map((wordArray, wordIndex) => {
       const letters = wordArray.map((letter, letterIndex) => {
         const id = makeId();
         const optionColors = ['Blue', 'Orange', 'Green'].filter(color => {
@@ -138,8 +193,7 @@ class Results extends Component {
 
 const mapStateToProps = state => ({
   query: state.words.query,
-  words: state.words.words,
-  selectedWords: state.words.selectedWords
+  words: state.words.words
 });
 
 export default connect(mapStateToProps)(Results);

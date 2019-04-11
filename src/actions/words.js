@@ -41,32 +41,6 @@ export const clearWords = () => ({
   type: CLEAR_WORDS
 });
 
-export const SELECT_WORD = 'SELECT_WORD';
-export const selectWord = word => ({
-  type: SELECT_WORD,
-  word
-});
-
-export const DESELECT_WORD = 'DESELECT_WORD';
-export const deselectWord = () => ({
-  type: DESELECT_WORD
-});
-
-export const TOGGLE_LETTER_OPTIONS = 'TOGGLE_LETTER_OPTIONS';
-export const toggleLetterOptions = (wordIndex, letterIndex) => ({
-  type: TOGGLE_LETTER_OPTIONS,
-  wordIndex,
-  letterIndex
-});
-
-export const SET_LETTER_COLOR = 'SET_LETTER_COLOR';
-export const setLetterColor = (color, wordIndex, letterIndex) => ({
-  type: SET_LETTER_COLOR,
-  color,
-  wordIndex,
-  letterIndex
-});
-
 export const fetchWords = (query, selectedWords) => dispatch => {
   dispatch(fetchWordsRequest());
   let {
