@@ -128,7 +128,6 @@ acerval
 acetate
 acetify
 acetone
-acetyls
 achenes
 achiest
 achieve
@@ -141,7 +140,6 @@ acidize
 aclinal
 aclinic
 acnodal
-acnodes
 acolyte
 acomous
 aconite
@@ -280,7 +278,6 @@ affront
 afghani
 afghans
 aflight
-afright
 aftmost
 against
 agamete
@@ -1212,7 +1209,6 @@ beckons
 becloud
 becomes
 becrawl
-becrust
 becurls
 bedamns
 bedared
@@ -1383,7 +1379,6 @@ berried
 berries
 berserk
 berthed
-bescour
 beseech
 beseems
 besides
@@ -1402,7 +1397,6 @@ bestman
 bestows
 bestrew
 bestrid
-bestrow
 bestuds
 beswarm
 bethink
@@ -2706,7 +2700,6 @@ chymics
 chymify
 chymist
 chymous
-chytrid
 cicadas
 cichlid
 ciliary
@@ -3426,7 +3419,6 @@ cryings
 cryogen
 cryonic
 cryptic
-cryptid
 crystal
 cuatros
 cubanes
@@ -6150,7 +6142,6 @@ gangway
 gaolers
 gaoling
 gapless
-gappers
 gapping
 garaged
 garages
@@ -12144,7 +12135,6 @@ refines
 refired
 refires
 refixed
-refixes
 reflags
 reflash
 reflate
@@ -12235,7 +12225,6 @@ reheard
 rehears
 reheats
 reheels
-rehides
 rehinge
 rehired
 rehires
@@ -12920,6 +12909,7 @@ roundel
 rounder
 roundly
 roundup
+rousers
 rousing
 routers
 routine
@@ -16744,7 +16734,6 @@ waddler
 waddles
 wadlike
 wafered
-waferer
 waffled
 waffler
 waffles
@@ -16897,7 +16886,6 @@ wayback
 waybill
 waybird
 waybook
-wayfare
 waylaid
 waylays
 wayment

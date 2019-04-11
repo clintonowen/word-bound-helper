@@ -2303,7 +2303,6 @@ degage
 degerm
 degree
 degums
-degunk
 degust
 deguts
 dehair
@@ -2326,8 +2325,6 @@ delfts
 delict
 delimb
 delime
-delink
-delint
 delist
 delphi
 deltas
@@ -2368,7 +2365,6 @@ denote
 denser
 dental
 dented
-dentil
 dentin
 denude
 deodar
