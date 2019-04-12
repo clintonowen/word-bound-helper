@@ -26,6 +26,7 @@ class Results extends Component {
 
   onStartOverClick () {
     this.setState({
+      editing: false,
       selectedWords: []
     });
     this.props.dispatch(updateSwipeIndex(0));
@@ -42,6 +43,7 @@ class Results extends Component {
     });
     const selectedWords = [...this.state.selectedWords, wordArray];
     this.setState({
+      editing: true,
       selectedWords
     });
   }
@@ -49,10 +51,19 @@ class Results extends Component {
   handleDeselectWord () {
     const selectedWords = this.state.selectedWords.slice(0, -1);
     this.setState({
+      editing: false,
       selectedWords
     });
     // Fetch an updated list of words
     this.props.dispatch(fetchWords(this.props.query, selectedWords));
+  }
+
+  handleClickDone () {
+    this.setState({
+      editing: false
+    });
+    // Fetch an updated list of words
+    this.props.dispatch(fetchWords(this.props.query, this.state.selectedWords));
   }
 
   handleToggleOptions (wordIndex, letterIndex) {
@@ -101,8 +112,6 @@ class Results extends Component {
     this.setState({
       selectedWords
     });
-    // Fetch an updated list of words
-    this.props.dispatch(fetchWords(this.props.query, selectedWords));
   }
 
   render () {
@@ -113,6 +122,17 @@ class Results extends Component {
         <p>
           Loading words...
         </p>
+      );
+    } else if (this.state.editing) {
+      results = (
+        <ol>
+          <li>
+            Set the color for each letter in the selected word above.
+          </li>
+          <li>
+            Click 'Done' to get a new list of possible words.
+          </li>
+        </ol>
       );
     } else if (this.props.words) {
       results = this.props.words.map(word => {
@@ -133,13 +153,17 @@ class Results extends Component {
       const letters = wordArray.map((letter, letterIndex) => {
         const id = makeId();
         if (wordIndex !== this.state.selectedWords.length - 1) {
+          let classes = 'letter-picker';
+          if (wordIndex === this.state.selectedWords.length - 2) {
+            classes += ' before-editing';
+          }
           return (
             <div
               key={id}
-              className='letter-picker'
+              className={classes}
             >
               <img
-                className='letter'
+                className='letter border-hidden'
                 src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
                 alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
             </div>
@@ -173,7 +197,7 @@ class Results extends Component {
             >
               <button onClick={() => this.handleToggleOptions(wordIndex, letterIndex)}>
                 <img
-                  className='letter'
+                  className='letter border-dash'
                   src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
                   alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
               </button>
@@ -190,11 +214,15 @@ class Results extends Component {
       );
     });
 
-    let deselectButton;
     if (selected.length > 0) {
-      deselectButton = (
-        <button onClick={() => this.handleDeselectWord()}>
-          Remove last word
+      selected[selected.length - 1].props.children.push(
+        <button key={makeId()} onClick={() => this.handleDeselectWord()}>
+          Remove
+        </button>
+      );
+      selected[selected.length - 1].props.children.push(
+        <button key={makeId()} onClick={() => this.handleClickDone()}>
+          Done
         </button>
       );
     }
@@ -205,7 +233,6 @@ class Results extends Component {
         <ul id='selected-words'>
           {selected}
         </ul>
-        {deselectButton}
         {count}
         <ol className='results'>
           {results}

@@ -17,7 +17,6 @@ abetter
 abettor
 abeyant
 abfarad
-abhenry
 abidden
 abiders
 abiding
@@ -36,11 +35,7 @@ ablated
 ablates
 ablator
 ablepsy
-abluded
-abludes
-abluent
 abluted
-ablutes
 abmodal
 aboding
 abolish
@@ -48,8 +43,6 @@ aborted
 abortee
 aborter
 abortus
-aboulia
-aboulic
 abounds
 abraded
 abrader
@@ -219,7 +212,6 @@ admirer
 admires
 admixed
 admixes
-adonise
 adonize
 adopted
 adopter
@@ -379,7 +371,6 @@ alcoves
 alditol
 aldoses
 alecost
-alecups
 alerted
 alerter
 alertly
@@ -2033,7 +2024,6 @@ bugging
 buglers
 bugling
 bugweed
-bugwort
 builder
 buildup
 bulbing
@@ -10193,7 +10183,6 @@ outskip
 outsoar
 outsold
 outsole
-outspan
 outspar
 outsped
 outspin

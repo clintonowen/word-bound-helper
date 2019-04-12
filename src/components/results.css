@@ -4,7 +4,7 @@
 }
 
 #selected-words li {
-  margin-bottom: 2px;
+  margin-bottom: -5px;
   position: relative;
 }
 
@@ -23,8 +23,9 @@
   -webkit-filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
   filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
   height: 30px;
-  margin-right: 5px;
+  margin-right: -2px;
   width: 30px;
+  border: 3px solid hsl(188, 51%, 25%);
 }
 
 .letter-option {
@@ -40,4 +41,12 @@
 
 .letter-option-right {
   left: 15px;
+}
+
+.before-editing {
+  margin-bottom: 30px;
+}
+
+.results ol {
+  padding-inline-start: 0;
 }
