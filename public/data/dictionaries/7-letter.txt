@@ -147,7 +147,6 @@ actable
 actants
 actinic
 actions
-activer
 actives
 actress
 actuals
@@ -483,7 +482,6 @@ amoeboa
 amongst
 amorous
 amorphs
-amorphy
 amounts
 amoxils
 amperes
@@ -1207,7 +1205,6 @@ bedfast
 bedform
 bedhead
 bedight
-bedirts
 bedirty
 bedizen
 bedkeys
@@ -1229,16 +1226,13 @@ bedrock
 bedroll
 bedroom
 bedrops
-bedropt
 bedrugs
 bedside
 bedsits
-bedsock
 bedsore
 bedtick
 bedtime
 bedtool
-beducks
 beduked
 bedukes
 bedungs
@@ -1379,7 +1373,6 @@ bestrid
 bestuds
 beswarm
 bethink
-bethump
 betided
 betides
 betimed
@@ -3577,7 +3570,6 @@ damaged
 damager
 damages
 damasks
-damlike
 damming
 dammits
 damners
@@ -9336,7 +9328,6 @@ munches
 mundane
 mundify
 mungers
-munited
 munites
 muonium
 muppets
@@ -12009,7 +12000,6 @@ rectify
 rectors
 rectory
 rectrix
-rectums
 recured
 recures
 recurls

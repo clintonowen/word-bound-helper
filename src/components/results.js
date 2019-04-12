@@ -52,7 +52,17 @@ class Results extends Component {
     });
   }
 
-  handleClickRemove () {
+  handleClickRemoveSelected () {
+    let selectedWords = this.state.selectedWords.slice(0, -1);
+    this.setState({
+      editingWord: null,
+      selectedWords
+    });
+    // Fetch an updated list of words
+    this.props.dispatch(fetchWords(this.props.query, selectedWords));
+  }
+
+  handleClickRemoveEditing () {
     this.setState({
       editingWord: null
     });
@@ -162,9 +172,16 @@ class Results extends Component {
           </div>
         );
       });
+      let remove;
+      if (wordIndex === this.state.selectedWords.length - 1) {
+        remove = (
+          <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveSelected()} title='Remove word' />
+        );
+      }
       return (
         <li key={makeId()}>
           {letters}
+          {remove}
         </li>
       );
     });
@@ -209,7 +226,7 @@ class Results extends Component {
         );
       });
       editing.push(
-        <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemove()} title='Remove word' />
+        <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveEditing()} title='Remove word' />
       );
       editing.push(
         <button className='add-button' key={makeId()} onClick={() => this.handleClickAdd()} title='Add word' />
