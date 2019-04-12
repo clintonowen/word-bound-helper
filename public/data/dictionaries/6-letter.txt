@@ -117,7 +117,6 @@ adduce
 adduct
 adepts
 adhere
-adhorn
 adieus
 adjoin
 adjure
@@ -2344,7 +2343,6 @@ demean
 dement
 demies
 demise
-demist
 demits
 demobs
 demoed
@@ -5519,7 +5517,6 @@ misses
 missus
 misted
 mister
-mistle
 mistry
 misuse
 miters
