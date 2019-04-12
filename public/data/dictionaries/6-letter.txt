@@ -119,7 +119,6 @@ adepts
 adhere
 adhorn
 adieus
-adjigo
 adjoin
 adjure
 adjust
@@ -2148,6 +2147,7 @@ dafter
 daftly
 dagger
 dahlia
+daikon
 dainty
 daises
 dalasi
@@ -2303,7 +2303,6 @@ degage
 degerm
 degree
 degums
-degunk
 degust
 deguts
 dehair
@@ -2326,8 +2325,6 @@ delfts
 delict
 delimb
 delime
-delink
-delint
 delist
 delphi
 deltas
@@ -2368,7 +2365,6 @@ denote
 denser
 dental
 dented
-dentil
 dentin
 denude
 deodar
@@ -2533,7 +2529,6 @@ divine
 diving
 divots
 diynal
-diynes
 djembe
 djubed
 doable
@@ -4493,7 +4488,6 @@ inmixt
 inmost
 innate
 inning
-inodes
 inputs
 inroad
 inrush
@@ -8697,7 +8691,6 @@ stepup
 stereo
 sterna
 sterns
-sterol
 stevia
 stewed
 sticks

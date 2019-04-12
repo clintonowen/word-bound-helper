@@ -1,55 +1,134 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateSwipeIndex } from '../actions/app';
-import { fetchWords, clearWords, selectWord, deselectWord, toggleLetterOptions, setLetterColor } from '../actions/words';
+import { fetchWords, clearWords } from '../actions/words';
 import { makeId } from '../actions/utils';
 import './results.css';
 
 class Results extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      editingWord: null,
+      selectedWords: []
+    };
+  }
+
   componentWillReceiveProps (nextProps) {
     if (nextProps.query.wordLength && nextProps.query.possLetters &&
-      (Object.keys(nextProps.query).some(key => {
+      Object.keys(nextProps.query).some(key => {
         return nextProps.query[key] !== this.props.query[key];
-      }) || nextProps.selectedWords !== this.props.selectedWords)) {
-      // console.log('Dispatching `fetchWords`.');
-      this.props.dispatch(fetchWords(nextProps.query, nextProps.selectedWords));
+      })) {
+      this.props.dispatch(fetchWords(nextProps.query, this.state.selectedWords));
     }
   }
 
   onStartOverClick () {
+    this.setState({
+      editingWord: null,
+      selectedWords: []
+    });
     this.props.dispatch(updateSwipeIndex(0));
     this.props.dispatch(clearWords());
   }
 
   handleSelectWord (word) {
-    let wordArray = word.split('').map(letter => {
+    let wordArray = word.split('').map((letter, index) => {
+      let color = 'Blue';
+      if (this.state.selectedWords.length > 0) {
+        const lastColor = this.state.selectedWords[this.state.selectedWords.length - 1][index].color;
+        if (lastColor === 'Green') {
+          color = 'Green';
+        }
+      }
       return {
         letter,
-        color: 'Blue',
+        color,
         showOptions: 'hidden'
       };
     });
-    this.props.dispatch(selectWord(wordArray));
+    this.setState({
+      editingWord: wordArray
+    });
   }
 
-  handleDeselectWord () {
-    this.props.dispatch(deselectWord());
+  handleClickRemove () {
+    this.setState({
+      editingWord: null
+    });
   }
 
-  handleToggleOptions (wordIndex, letterIndex) {
-    this.props.dispatch(toggleLetterOptions(wordIndex, letterIndex));
+  handleClickAdd () {
+    const selectedWords = [...this.state.selectedWords, this.state.editingWord];
+    this.setState({
+      editingWord: null,
+      selectedWords
+    });
+    // Fetch an updated list of words
+    this.props.dispatch(fetchWords(this.props.query, selectedWords));
   }
 
-  handleSelectColor (color, wordIndex, letterIndex) {
-    this.props.dispatch(setLetterColor(color, wordIndex, letterIndex));
-    this.props.dispatch(toggleLetterOptions(wordIndex, letterIndex));
-    // this.props.dispatch(fetchWords(this.props.query, this.props.selectedWords));
+  handleToggleOptions (letterIndex) {
+    // Hide options for all letters
+    let editingWord = this.state.editingWord.map(letter => {
+      return Object.assign({}, letter, {
+        showOptions: 'hidden'
+      });
+    });
+    // If options were hidden for selected letter, make them visible
+    let currentSetting = this.state.editingWord[letterIndex].showOptions;
+    if (currentSetting === 'hidden') {
+      const letter = Object.assign({}, this.state.editingWord[letterIndex], {
+        showOptions: 'visible'
+      });
+      // Reinsert toggled letter into parent word
+      editingWord = (letterIndex > 0)
+        ? editingWord.slice(0, letterIndex).concat(letter).concat(editingWord.slice(letterIndex + 1))
+        : [letter].concat(editingWord.slice(1));
+    }
+    // Assign updated `selectedWords` to state
+    this.setState({
+      editingWord
+    });
+  }
+
+  handleSelectColor (color, letterIndex) {
+    // Set new letter color
+    const letter = Object.assign({}, this.state.editingWord[letterIndex], {
+      color,
+      showOptions: 'hidden'
+    });
+    // Reinsert letter into `editingWord`
+    const editingWord = (letterIndex > 0)
+      ? this.state.editingWord.slice(0, letterIndex).concat(letter).concat(this.state.editingWord.slice(letterIndex + 1))
+      : [letter].concat(this.state.editingWord.slice(1));
+    // Assign updated `editingWord` to state
+    this.setState({
+      editingWord
+    });
   }
 
   render () {
     let results;
     let count;
-    if (this.props.words) {
+    if (this.props.loading) {
+      results = (
+        <p>
+          Loading words...
+        </p>
+      );
+    } else if (this.state.editingWord) {
+      results = (
+        <ol>
+          <li>
+            Click the letters in the word above to set their color.
+          </li>
+          <li>
+            Click the plus sign to add the word to your list of guesses.
+          </li>
+        </ol>
+      );
+    } else if (this.props.words) {
       results = this.props.words.map(word => {
         const id = makeId();
         return (
@@ -64,22 +143,48 @@ class Results extends Component {
       count = (<p>{this.props.words.length} possible solutions</p>);
     }
 
-    let selected = this.props.selectedWords.map((wordArray, wordIndex) => {
+    let selected = this.state.selectedWords.map((wordArray, wordIndex) => {
       const letters = wordArray.map((letter, letterIndex) => {
         const id = makeId();
+        let classes = 'letter-picker';
+        if (wordIndex === this.state.selectedWords.length - 1) {
+          classes += ' before-editing';
+        }
+        return (
+          <div
+            key={id}
+            className={classes}
+          >
+            <img
+              className='letter border-hidden'
+              src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
+              alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
+          </div>
+        );
+      });
+      return (
+        <li key={makeId()}>
+          {letters}
+        </li>
+      );
+    });
+
+    let editing;
+    if (this.state.editingWord) {
+      editing = this.state.editingWord.map((letter, letterIndex) => {
         const optionColors = ['Blue', 'Orange', 'Green'].filter(color => {
           return color !== letter.color;
         });
         const options = (
           <React.Fragment>
-            <button onClick={() => this.handleSelectColor(optionColors[0], wordIndex, letterIndex)}>
+            <button onClick={() => this.handleSelectColor(optionColors[0], letterIndex)}>
               <img
                 className='letter-option letter-option-left'
                 src={`/img/letters-${optionColors[0].toLowerCase()}/${letter.letter.toUpperCase()}.png`}
                 alt={`${optionColors[0]} ${letter.letter.toUpperCase()}`}
                 style={{ visibility: `${letter.showOptions}` }} />
             </button>
-            <button onClick={() => this.handleSelectColor(optionColors[1], wordIndex, letterIndex)}>
+            <button onClick={() => this.handleSelectColor(optionColors[1], letterIndex)}>
               <img
                 className='letter-option letter-option-right'
                 src={`/img/letters-${optionColors[1].toLowerCase()}/${letter.letter.toUpperCase()}.png`}
@@ -90,12 +195,12 @@ class Results extends Component {
         );
         return (
           <div
-            key={id}
+            key={makeId()}
             className='letter-picker'
           >
-            <button onClick={() => this.handleToggleOptions(wordIndex, letterIndex)}>
+            <button onClick={() => this.handleToggleOptions(letterIndex)}>
               <img
-                className='letter'
+                className='letter border-dash'
                 src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
                 alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
             </button>
@@ -103,20 +208,11 @@ class Results extends Component {
           </div>
         );
       });
-      const id = makeId();
-      return (
-        <li key={id}>
-          {letters}
-        </li>
+      editing.push(
+        <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemove()} title='Remove word' />
       );
-    });
-
-    let deselectButton;
-    if (selected.length > 0) {
-      deselectButton = (
-        <button onClick={() => this.handleDeselectWord()}>
-          Remove last word
-        </button>
+      editing.push(
+        <button className='add-button' key={makeId()} onClick={() => this.handleClickAdd()} title='Add word' />
       );
     }
 
@@ -126,7 +222,7 @@ class Results extends Component {
         <ul id='selected-words'>
           {selected}
         </ul>
-        {deselectButton}
+        {editing}
         {count}
         <ol className='results'>
           {results}
@@ -137,9 +233,9 @@ class Results extends Component {
 }
 
 const mapStateToProps = state => ({
+  loading: state.words.loading,
   query: state.words.query,
-  words: state.words.words,
-  selectedWords: state.words.selectedWords
+  words: state.words.words
 });
 
 export default connect(mapStateToProps)(Results);

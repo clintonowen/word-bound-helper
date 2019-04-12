@@ -10,8 +10,6 @@ abating
 abators
 abaxial
 abdomen
-abduced
-abduces
 abducts
 abettal
 abetted
@@ -19,7 +17,6 @@ abetter
 abettor
 abeyant
 abfarad
-abhenry
 abidden
 abiders
 abiding
@@ -37,21 +34,13 @@ abjures
 ablated
 ablates
 ablator
-ablepsy
-abluded
-abludes
-abluent
 abluted
-ablutes
 abmodal
 aboding
 abolish
 aborted
 abortee
 aborter
-abortus
-aboulia
-aboulic
 abounds
 abraded
 abrader
@@ -128,7 +117,6 @@ acerval
 acetate
 acetify
 acetone
-acetyls
 achenes
 achiest
 achieve
@@ -141,14 +129,12 @@ acidize
 aclinal
 aclinic
 acnodal
-acnodes
 acolyte
 acomous
 aconite
 acouple
 acquest
 acquire
-acquist
 acquits
 acrasid
 acreage
@@ -204,7 +190,6 @@ adheres
 adipoid
 adipoma
 adipose
-adjigos
 adjoins
 adjoint
 adjourn
@@ -224,7 +209,6 @@ admirer
 admires
 admixed
 admixes
-adonise
 adonize
 adopted
 adopter
@@ -280,7 +264,6 @@ affront
 afghani
 afghans
 aflight
-afright
 aftmost
 against
 agamete
@@ -308,7 +291,6 @@ agonise
 agonism
 agonist
 agonize
-agoutis
 aground
 aidless
 aiglets
@@ -385,7 +367,6 @@ alcoves
 alditol
 aldoses
 alecost
-alecups
 alerted
 alerter
 alertly
@@ -588,7 +569,6 @@ anodont
 anodyne
 anoints
 anomaly
-anomers
 anonyms
 another
 answers
@@ -691,7 +671,6 @@ archery
 archfoe
 arching
 archive
-archlet
 archons
 archway
 arcsine
@@ -758,8 +737,6 @@ artisan
 artists
 artless
 artsier
-artsman
-artsmen
 artware
 artwork
 arugula
@@ -821,7 +798,6 @@ atheism
 atheist
 atheize
 athlete
-athodyd
 athwart
 atlases
 atomics
@@ -1212,7 +1188,6 @@ beckons
 becloud
 becomes
 becrawl
-becrust
 becurls
 bedamns
 bedared
@@ -1383,7 +1358,6 @@ berried
 berries
 berserk
 berthed
-bescour
 beseech
 beseems
 besides
@@ -1402,7 +1376,6 @@ bestman
 bestows
 bestrew
 bestrid
-bestrow
 bestuds
 beswarm
 bethink
@@ -1585,7 +1558,6 @@ blesses
 blether
 blights
 blighty
-blimped
 blinded
 blinder
 blindly
@@ -2042,7 +2014,6 @@ bugging
 buglers
 bugling
 bugweed
-bugwort
 builder
 buildup
 bulbing
@@ -2318,7 +2289,6 @@ cantles
 cantons
 cantors
 cantrap
-cantred
 cantref
 cantrip
 canucks
@@ -2706,7 +2676,6 @@ chymics
 chymify
 chymist
 chymous
-chytrid
 cicadas
 cichlid
 ciliary
@@ -3426,7 +3395,6 @@ cryings
 cryogen
 cryonic
 cryptic
-cryptid
 crystal
 cuatros
 cubanes
@@ -4115,7 +4083,6 @@ dewlike
 dewools
 deworms
 dextral
-dextran
 dextrin
 dezincs
 dharmas
@@ -5120,7 +5087,6 @@ estival
 estriol
 estrone
 estrous
-estrual
 estrums
 estuary
 estuate
@@ -6150,7 +6116,6 @@ gangway
 gaolers
 gaoling
 gapless
-gappers
 gapping
 garaged
 garages
@@ -7096,6 +7061,7 @@ history
 hitched
 hitcher
 hitches
+hitless
 hitters
 hitting
 hoagies
@@ -9091,7 +9057,6 @@ misdoer
 misdoes
 misdone
 misdraw
-misdrew
 misedit
 miserly
 misfeed
@@ -10205,7 +10170,6 @@ outskip
 outsoar
 outsold
 outsole
-outspan
 outspar
 outsped
 outspin
@@ -12144,7 +12108,6 @@ refines
 refired
 refires
 refixed
-refixes
 reflags
 reflash
 reflate
@@ -12235,7 +12198,6 @@ reheard
 rehears
 reheats
 reheels
-rehides
 rehinge
 rehired
 rehires
@@ -12920,6 +12882,7 @@ roundel
 rounder
 roundly
 roundup
+rousers
 rousing
 routers
 routine
@@ -16744,7 +16707,6 @@ waddler
 waddles
 wadlike
 wafered
-waferer
 waffled
 waffler
 waffles
@@ -16897,7 +16859,6 @@ wayback
 waybill
 waybird
 waybook
-wayfare
 waylaid
 waylays
 wayment

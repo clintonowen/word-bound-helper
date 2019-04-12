@@ -13,19 +13,20 @@ const VirtualizeSwipeableViews = bindKeyboard(virtualize(SwipeableViews));
 
 const styles = {
   slide: {
+    backgroundColor: '#766E8E',
     padding: 15,
     minHeight: 100,
     color: '#fff'
-  },
-  slide1: {
-    backgroundColor: '#FEA900'
-  },
-  slide2: {
-    backgroundColor: '#B3DC4A'
-  },
-  slide3: {
-    backgroundColor: '#6AC0FF'
   }
+  // slide1: {
+  //   backgroundColor: '#FEA900'
+  // },
+  // slide2: {
+  //   backgroundColor: '#B3DC4A'
+  // },
+  // slide3: {
+  //   backgroundColor: '#6AC0FF'
+  // }
 };
 
 function slideRenderer (params) {
