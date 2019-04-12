@@ -10,8 +10,6 @@ abating
 abators
 abaxial
 abdomen
-abduced
-abduces
 abducts
 abettal
 abetted
@@ -146,7 +144,6 @@ aconite
 acouple
 acquest
 acquire
-acquist
 acquits
 acrasid
 acreage
@@ -4107,7 +4104,6 @@ dewlike
 dewools
 deworms
 dextral
-dextran
 dextrin
 dezincs
 dharmas
@@ -7087,6 +7083,7 @@ history
 hitched
 hitcher
 hitches
+hitless
 hitters
 hitting
 hoagies

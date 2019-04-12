@@ -29,53 +29,62 @@ class WordsForm extends Component {
   }
 
   render () {
-    let numbers = [];
-    for (let i = 3; i <= 7; i++) {
-      let id = makeId();
-      let color = 'Blue';
-      if (`${i}` === this.props.wordLength) {
-        color = 'Orange';
+    if (this.props.loading) {
+      return (
+        <p>
+          Loading...
+        </p>
+      );
+    } else {
+      let numbers = [];
+      for (let i = 3; i <= 7; i++) {
+        let id = makeId();
+        let color = 'Blue';
+        if (`${i}` === this.props.wordLength) {
+          color = 'Orange';
+        }
+        numbers.push((
+          <div key={id} className='number-picker'>
+            <button
+              onClick={() => this.onLengthClick(`${i}`)}
+            >
+              <img
+                className='number-option'
+                src={`/img/numbers-${color.toLowerCase()}/${i}.png`}
+                alt={`${color} ${i}`}
+              />
+            </button>
+          </div>
+        ));
       }
-      numbers.push((
-        <div key={id} className='number-picker'>
-          <button
-            onClick={() => this.onLengthClick(`${i}`)}
+      return (
+        <React.Fragment>
+          <button onClick={() => this.onNavClick(0, true)}>Start Over</button>
+          <br />
+          <p>Select word length:</p>
+          {numbers}
+          <p>Enter available letters:</p>
+          <form
+            className='words-form'
+            onSubmit={e => this.onSubmit(e)}
           >
-            <img
-              className='number-option'
-              src={`/img/numbers-${color.toLowerCase()}/${i}.png`}
-              alt={`${color} ${i}`}
+            <Field
+              id='possLetters'
+              label='Possible Letters'
+              component='input'
+              type='text'
+              name='possLetters'
             />
-          </button>
-        </div>
-      ));
+          </form>
+          <button onClick={() => this.onNavClick(2)}>Continue</button>
+        </React.Fragment>
+      );
     }
-    return (
-      <React.Fragment>
-        <button onClick={() => this.onNavClick(0, true)}>Start Over</button>
-        <br />
-        <p>Select word length:</p>
-        {numbers}
-        <p>Enter available letters:</p>
-        <form
-          className='words-form'
-          onSubmit={e => this.onSubmit(e)}
-        >
-          <Field
-            id='possLetters'
-            label='Possible Letters'
-            component='input'
-            type='text'
-            name='possLetters'
-          />
-        </form>
-        <button onClick={() => this.onNavClick(2)}>Continue</button>
-      </React.Fragment>
-    );
   }
 }
 
 const mapStateToProps = state => ({
+  loading: state.words.loading,
   wordLength: state.words.query.wordLength,
   possLetters: state.words.query.possLetters,
   values: getFormValues('letters')(state)
