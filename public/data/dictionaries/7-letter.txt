@@ -34,7 +34,6 @@ abjures
 ablated
 ablates
 ablator
-ablepsy
 abluted
 abmodal
 aboding
@@ -42,7 +41,6 @@ abolish
 aborted
 abortee
 aborter
-abortus
 abounds
 abraded
 abrader
@@ -192,7 +190,6 @@ adheres
 adipoid
 adipoma
 adipose
-adjigos
 adjoins
 adjoint
 adjourn
@@ -294,7 +291,6 @@ agonise
 agonism
 agonist
 agonize
-agoutis
 aground
 aidless
 aiglets
@@ -573,7 +569,6 @@ anodont
 anodyne
 anoints
 anomaly
-anomers
 anonyms
 another
 answers
@@ -676,7 +671,6 @@ archery
 archfoe
 arching
 archive
-archlet
 archons
 archway
 arcsine
@@ -743,8 +737,6 @@ artisan
 artists
 artless
 artsier
-artsman
-artsmen
 artware
 artwork
 arugula
@@ -806,7 +798,6 @@ atheism
 atheist
 atheize
 athlete
-athodyd
 athwart
 atlases
 atomics
@@ -1567,7 +1558,6 @@ blesses
 blether
 blights
 blighty
-blimped
 blinded
 blinder
 blindly
@@ -2299,7 +2289,6 @@ cantles
 cantons
 cantors
 cantrap
-cantred
 cantref
 cantrip
 canucks
@@ -5098,7 +5087,6 @@ estival
 estriol
 estrone
 estrous
-estrual
 estrums
 estuary
 estuate
@@ -9069,7 +9057,6 @@ misdoer
 misdoes
 misdone
 misdraw
-misdrew
 misedit
 miserly
 misfeed

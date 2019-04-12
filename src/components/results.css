@@ -50,3 +50,25 @@
 .results ol {
   padding-inline-start: 0;
 }
+
+.remove-button {
+  background: none;
+  background-image: url('/img/minus-button.png');
+  border: none;
+  height: 30px;
+  margin-left: 10px;
+  position: relative;
+  top: -4px;
+  width: 30px;
+}
+
+.add-button {
+  background: none;
+  background-image: url('/img/plus-button.png');
+  border: none;
+  height: 30px;
+  margin-left: 10px;
+  position: relative;
+  top: -4px;
+  width: 30px;
+}
