@@ -2478,7 +2478,6 @@ cereals
 cerebra
 cerises
 ceriums
-ceroids
 certain
 certify
 cerumen
@@ -12091,7 +12090,6 @@ refiled
 refiles
 refills
 refilms
-refinds
 refined
 refiner
 refines
