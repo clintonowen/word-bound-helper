@@ -757,6 +757,7 @@ ashless
 ashtray
 ashweed
 asinine
+asocial
 aspects
 asperse
 asphalt
@@ -2482,7 +2483,6 @@ certain
 certify
 cerumen
 cervids
-cervoid
 cesiums
 cession
 cesspit
