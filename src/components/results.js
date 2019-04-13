@@ -166,7 +166,7 @@ class Results extends Component {
             className={classes}
           >
             <img
-              className='letter border-hidden'
+              className='letter-image'
               src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
               alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
           </div>
@@ -189,25 +189,32 @@ class Results extends Component {
     let editing;
     if (this.state.editingWord) {
       editing = this.state.editingWord.map((letter, letterIndex) => {
-        const optionColors = ['Blue', 'Orange', 'Green'].filter(color => {
+        const colors = ['Blue', 'Orange', 'Green'].filter(color => {
           return color !== letter.color;
         });
+        const bgImage = `/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`;
+        const bgOption1 = `/img/letters-${colors[0].toLowerCase()}/${letter.letter.toUpperCase()}.png`;
+        const bgOption2 = `/img/letters-${colors[1].toLowerCase()}/${letter.letter.toUpperCase()}.png`;
         const options = (
           <React.Fragment>
-            <button onClick={() => this.handleSelectColor(optionColors[0], letterIndex)}>
-              <img
-                className='letter-option letter-option-left'
-                src={`/img/letters-${optionColors[0].toLowerCase()}/${letter.letter.toUpperCase()}.png`}
-                alt={`${optionColors[0]} ${letter.letter.toUpperCase()}`}
-                style={{ visibility: `${letter.showOptions}` }} />
-            </button>
-            <button onClick={() => this.handleSelectColor(optionColors[1], letterIndex)}>
-              <img
-                className='letter-option letter-option-right'
-                src={`/img/letters-${optionColors[1].toLowerCase()}/${letter.letter.toUpperCase()}.png`}
-                alt={`${optionColors[1]} ${letter.letter.toUpperCase()}`}
-                style={{ visibility: `${letter.showOptions}` }} />
-            </button>
+            <button
+              onClick={() => this.handleSelectColor(colors[0], letterIndex)}
+              className='letter-option letter-option-left'
+              title={`${colors[0]} ${letter.letter.toUpperCase()}`}
+              style={{
+                visibility: `${letter.showOptions}`,
+                backgroundImage: `url(${bgOption1})`
+              }}
+            />
+            <button
+              onClick={() => this.handleSelectColor(colors[1], letterIndex)}
+              className='letter-option letter-option-right'
+              title={`${colors[1]} ${letter.letter.toUpperCase()}`}
+              style={{
+                visibility: `${letter.showOptions}`,
+                backgroundImage: `url(${bgOption2})`
+              }}
+            />
           </React.Fragment>
         );
         return (
@@ -215,12 +222,14 @@ class Results extends Component {
             key={makeId()}
             className='letter-picker'
           >
-            <button onClick={() => this.handleToggleOptions(letterIndex)}>
-              <img
-                className='letter border-dash'
-                src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
-                alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
-            </button>
+            <button
+              onClick={() => this.handleToggleOptions(letterIndex)}
+              className='letter-button'
+              title={`${letter.color} ${letter.letter.toUpperCase()}`}
+              style={{
+                backgroundImage: `url(${bgImage})`
+              }}
+            />
             {options}
           </div>
         );

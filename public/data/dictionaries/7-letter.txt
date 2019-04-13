@@ -757,6 +757,7 @@ ashless
 ashtray
 ashweed
 asinine
+asocial
 aspects
 asperse
 asphalt
@@ -2478,12 +2479,10 @@ cereals
 cerebra
 cerises
 ceriums
-ceroids
 certain
 certify
 cerumen
 cervids
-cervoid
 cesiums
 cession
 cesspit
@@ -12091,7 +12090,6 @@ refiled
 refiles
 refills
 refilms
-refinds
 refined
 refiner
 refines
