@@ -55,7 +55,7 @@ function slideRenderer (params) {
   }
 
   return (
-    <div style={Object.assign({}, styles.slide, style)} key={key}>
+    <div className='slide-container' style={Object.assign({}, styles.slide, style)} key={key}>
       {component}
     </div>
   );
@@ -73,14 +73,14 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <React.Fragment>
         <VirtualizeSwipeableViews
           index={this.props.swipeIndex}
           onChangeIndex={this.handleChangeIndex}
           slideRenderer={slideRenderer}
           disabled
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -150,7 +150,16 @@ class Results extends Component {
         );
       });
 
-      count = (<p>{this.props.words.length} possible solutions</p>);
+      count = (
+        <React.Fragment>
+          <p>
+            {this.props.words.length} possible solutions
+          </p>
+          <p>
+            Select a word:
+          </p>
+        </React.Fragment>
+      );
     }
 
     let selected = this.state.selectedWords.map((wordArray, wordIndex) => {
@@ -248,7 +257,9 @@ class Results extends Component {
         <ul id='selected-words'>
           {selected}
         </ul>
-        {editing}
+        <div id='editing-word'>
+          {editing}
+        </div>
         {count}
         <ol className='results'>
           {results}

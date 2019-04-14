@@ -262,7 +262,6 @@ affrays
 affront
 afghani
 afghans
-aflight
 aftmost
 against
 agamete
@@ -282,12 +281,9 @@ agility
 agitate
 agitpop
 agnatha
-agnosia
-agnosic
 agogics
 agonies
 agonise
-agonism
 agonist
 agonize
 aground
@@ -300,7 +296,6 @@ aimless
 airable
 airbags
 airbase
-airbeds
 airboat
 airborn
 aircell
@@ -314,7 +309,6 @@ airflow
 airfoil
 airgaps
 airglow
-airguns
 airhead
 airhole
 airiest
@@ -466,7 +460,6 @@ amercer
 amerces
 amiable
 amiably
-amidone
 ammeter
 ammines
 ammonia
@@ -545,7 +538,6 @@ animals
 animate
 animism
 animist
-animose
 anionic
 aniseed
 anklets
@@ -2088,7 +2080,6 @@ bursary
 bursate
 burying
 busboys
-busgirl
 bushbok
 bushels
 bushfly
@@ -2272,7 +2263,6 @@ cannoli
 cannolo
 cannons
 cannula
-canoers
 canonic
 canonry
 cantata
@@ -4233,7 +4223,6 @@ disgown
 disgust
 dishful
 dishing
-dishorn
 dishpan
 dishrag
 disject
@@ -6872,7 +6861,6 @@ haulers
 hauling
 haunted
 haunter
-hauynes
 hawkers
 hawkeye
 hawking
@@ -7913,7 +7901,6 @@ kayaked
 kayaker
 kebayas
 keekers
-keeking
 keeling
 keenest
 keening
@@ -9424,7 +9411,6 @@ nametag
 nannies
 nanobes
 nanobot
-nanodot
 nanogap
 nanogel
 nanoink
@@ -15066,7 +15052,6 @@ tallish
 tallows
 tallowy
 tallyho
-talonid
 taluses
 tamable
 tamales

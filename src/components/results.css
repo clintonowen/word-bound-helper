@@ -3,6 +3,8 @@
   padding-inline-start: 0px;
   margin-block-start: 0px;
   margin-block-end: 0px;
+  margin-top: 30px;
+  text-align: left;
 }
 
 #selected-words li {
@@ -10,9 +12,17 @@
   position: relative;
 }
 
+#editing-word {
+  text-align: left;
+}
+
 .letter-picker {
   display: inline-block;
   position: relative;
+}
+
+.before-editing {
+  margin-bottom: 30px;
 }
 
 .letter-image {
@@ -54,12 +64,14 @@
   left: 15px;
 }
 
-.before-editing {
-  margin-bottom: 30px;
+.results {
+  padding-inline-start: 0;
 }
 
-.results ol {
-  padding-inline-start: 0;
+.results > li {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
 }
 
 .remove-button {
@@ -69,8 +81,12 @@
   height: 30px;
   margin-left: 10px;
   position: relative;
-  top: -4px;
+  top: -2px;
   width: 30px;
+}
+
+#selected-words .remove-button {
+  top: -5px;
 }
 
 .add-button {
