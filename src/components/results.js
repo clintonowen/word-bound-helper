@@ -139,7 +139,7 @@ class Results extends Component {
           </li>
         </ol>
       );
-    } else if (this.props.words) {
+    } else if (this.props.words && this.props.words.length > 0) {
       results = this.props.words.map(word => {
         const id = makeId();
         return (
@@ -166,29 +166,28 @@ class Results extends Component {
           </p>
         </React.Fragment>
       );
+    } else {
+      results = (
+        <p>
+          Uh oh! No words found!
+        </p>
+      );
     }
 
     let selected = this.state.selectedWords.map((wordArray, wordIndex) => {
       let found = true;
       const letters = wordArray.map((letter, letterIndex) => {
         const id = makeId();
-        let classes = 'letter-picker';
-        if (wordIndex === this.state.selectedWords.length - 1) {
-          classes += ' before-editing';
-        }
         if (letter.color !== 'Green') {
           found = false;
         }
         return (
-          <div
+          <span
             key={id}
-            className={classes}
+            className={`letter-image ${letter.color.toLowerCase()}`}
           >
-            <img
-              className='letter-image'
-              src={`/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`}
-              alt={`${letter.color} ${letter.letter.toUpperCase()}`} />
-          </div>
+            {letter.letter.toUpperCase()}
+          </span>
         );
       });
       let remove;
@@ -196,6 +195,10 @@ class Results extends Component {
         remove = (
           <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveSelected()} title='Remove word' />
         );
+      }
+      let contClasses = 'letters-container';
+      if (wordIndex !== this.state.selectedWords.length - 1) {
+        contClasses += ' not-last';
       }
       if (found) {
         count = null;
@@ -213,41 +216,44 @@ class Results extends Component {
       }
       return (
         <li key={makeId()}>
-          {letters}
+          <div className={contClasses}>
+            {letters}
+          </div>
           {remove}
         </li>
       );
     });
 
-    let editing;
+    let editingButtons;
     if (this.state.editingWord) {
-      editing = this.state.editingWord.map((letter, letterIndex) => {
+      editingButtons = this.state.editingWord.map((letter, letterIndex) => {
         const colors = ['Blue', 'Orange', 'Green'].filter(color => {
           return color !== letter.color;
         });
-        const bgImage = `/img/letters-${letter.color.toLowerCase()}/${letter.letter.toUpperCase()}.png`;
-        const bgOption1 = `/img/letters-${colors[0].toLowerCase()}/${letter.letter.toUpperCase()}.png`;
-        const bgOption2 = `/img/letters-${colors[1].toLowerCase()}/${letter.letter.toUpperCase()}.png`;
+        const colorOption1 = `${colors[0].toLowerCase()}`;
+        const colorOption2 = `${colors[1].toLowerCase()}`;
         const options = (
           <React.Fragment>
             <button
               onClick={() => this.handleSelectColor(colors[0], letterIndex)}
-              className='letter-option letter-option-left'
+              className={`letter-option letter-option-left ${colorOption1}`}
               title={`${colors[0]} ${letter.letter.toUpperCase()}`}
               style={{
-                visibility: `${letter.showOptions}`,
-                backgroundImage: `url(${bgOption1})`
+                visibility: `${letter.showOptions}`
               }}
-            />
+            >
+              {letter.letter.toUpperCase()}
+            </button>
             <button
               onClick={() => this.handleSelectColor(colors[1], letterIndex)}
-              className='letter-option letter-option-right'
+              className={`letter-option letter-option-right ${colorOption2}`}
               title={`${colors[1]} ${letter.letter.toUpperCase()}`}
               style={{
-                visibility: `${letter.showOptions}`,
-                backgroundImage: `url(${bgOption2})`
+                visibility: `${letter.showOptions}`
               }}
-            />
+            >
+              {letter.letter.toUpperCase()}
+            </button>
           </React.Fragment>
         );
         return (
@@ -257,21 +263,27 @@ class Results extends Component {
           >
             <button
               onClick={() => this.handleToggleOptions(letterIndex)}
-              className='letter-button'
+              className={`letter-button ${letter.color.toLowerCase()}`}
               title={`${letter.color} ${letter.letter.toUpperCase()}`}
-              style={{
-                backgroundImage: `url(${bgImage})`
-              }}
-            />
+            >
+              {letter.letter.toUpperCase()}
+            </button>
             {options}
           </div>
         );
       });
-      editing.push(
-        <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveEditing()} title='Remove word' />
-      );
-      editing.push(
-        <button className='add-button' key={makeId()} onClick={() => this.handleClickAdd()} title='Add word' />
+    }
+
+    let editing;
+    if (this.state.editingWord) {
+      editing = (
+        <div id='editing-container'>
+          <div id='editing-buttons'>
+            {editingButtons}
+          </div>
+          <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveEditing()} title='Remove word' />
+          <button className='add-button' key={makeId()} onClick={() => this.handleClickAdd()} title='Add word' />
+        </div>
       );
     }
 
@@ -281,9 +293,7 @@ class Results extends Component {
         <ul id='selected-words'>
           {selected}
         </ul>
-        <div id='editing-word'>
-          {editing}
-        </div>
+        {editing}
         {count}
         <ol className='results'>
           {results}
