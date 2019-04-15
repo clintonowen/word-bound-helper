@@ -62,13 +62,11 @@ class WordsForm extends Component {
         numbers.push((
           <div key={id} className='number-picker'>
             <button
+              className={`number-option ${color.toLowerCase()}`}
               onClick={() => this.onLengthClick(`${i}`)}
+              title={`${color} ${i}`}
             >
-              <img
-                className='number-option'
-                src={`/img/numbers-${color.toLowerCase()}/${i}.png`}
-                alt={`${color} ${i}`}
-              />
+              {i}
             </button>
           </div>
         ));

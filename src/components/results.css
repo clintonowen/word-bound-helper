@@ -3,17 +3,36 @@
   padding-inline-start: 0px;
   margin-block-start: 0px;
   margin-block-end: 0px;
+  margin-bottom: 30px;
   margin-top: 30px;
   text-align: left;
 }
 
 #selected-words li {
-  margin-bottom: -5px;
   position: relative;
 }
 
-#editing-word {
+#editing-container {
   text-align: left;
+}
+
+#editing-buttons {
+  background-color: #1F5760;
+  display: inline-block;
+  padding: 2px;
+}
+
+.letters-container {
+  background-color: #1F5760;
+  display: inline-block;
+  padding-bottom: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 4px;
+}
+
+.not-last {
+  padding-bottom: 0px;
 }
 
 .letter-picker {
@@ -21,50 +40,59 @@
   position: relative;
 }
 
-.before-editing {
-  margin-bottom: 30px;
-}
-
 .letter-image {
-  border: 3px solid hsl(188, 51%, 25%);
-  -webkit-filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
-  filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
   height: 30px;
-  margin-right: -2px;
+  line-height: 30px;
+  margin-left: 2px;
+  margin-right: 2px;
+  text-align: center;
   width: 30px;
 }
 
 .letter-button {
-  background: none;
-  background-size: 30px 30px;
-  border: 3px solid hsl(188, 51%, 25%);
-  -webkit-filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
+  border: none;
+  border-radius: 4px;
+  color: white;
   filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
-  height: 36px;
-  margin-right: -2px;
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
+  font-size: 30px;
+  font-weight: bold;
+  height: 30px;
+  line-height: 30px;
+  margin: 2px;
   padding: 0;
-  width: 36px;
+  width: 30px;
 }
 
 .letter-option {
-  background: none;
-  background-size: 20px 20px;
   border: none;
+  border-radius: 2px;
   bottom: -20px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
   height: 20px;
+  line-height: 20px;
+  padding: 0;
   position: absolute;
   width: 20px;
 }
 
 .letter-option-left {
-  left: -5px;
+  left: -4px;
 }
 
 .letter-option-right {
-  left: 15px;
+  left: 16px;
 }
 
 .results {
+  margin-top: 24px;
   padding-inline-start: 0;
 }
 
@@ -79,14 +107,14 @@
   background-image: url('/img/minus-button.png');
   border: none;
   height: 30px;
-  margin-left: 10px;
+  margin-left: 8px;
   position: relative;
-  top: -2px;
+  top: 2px;
   width: 30px;
 }
 
 #selected-words .remove-button {
-  top: -5px;
+  top: 3px;
 }
 
 .add-button {
@@ -96,7 +124,7 @@
   height: 30px;
   margin-left: 10px;
   position: relative;
-  top: -4px;
+  top: 2px;
   width: 30px;
 }
 

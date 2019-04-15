@@ -10400,6 +10400,7 @@ paronym
 parotid
 parquet
 parrell
+parries
 parrots
 parsecs
 parsers
