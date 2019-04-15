@@ -1,3 +1,8 @@
+html {
+  background-color: #766E8E;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;

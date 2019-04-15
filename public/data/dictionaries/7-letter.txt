@@ -4760,7 +4760,6 @@ elodeas
 elogies
 elogist
 elogium
-eloigns
 eloined
 elopers
 eloping
@@ -7621,7 +7620,6 @@ ionones
 iophobe
 iotized
 iotizes
-iphones
 irately
 iratest
 irenics
@@ -8378,7 +8376,6 @@ linseed
 lintels
 lintier
 lioness
-lionets
 lionise
 lionism
 lionize
@@ -9614,7 +9611,6 @@ nonhero
 noniron
 nonjade
 nonjail
-nonjava
 nonjazz
 nonjews
 nonjobs
@@ -9628,7 +9624,6 @@ nonlate
 nonlazy
 nonlead
 nonleap
-nonliar
 nonlife
 nonlove
 nonlung
@@ -15311,7 +15306,6 @@ thimble
 thinker
 thinned
 thinner
-thiones
 thirdly
 thirsts
 thirsty
@@ -15530,7 +15524,6 @@ toolkit
 toolman
 toolmen
 toolset
-toonies
 tooters
 toothed
 tooting
@@ -15928,7 +15921,6 @@ twizzle
 twizzly
 twofers
 twofold
-twonies
 twoonie
 twosome
 twostep

@@ -33,6 +33,7 @@ class Results extends Component {
   }
 
   handleSelectWord (word) {
+    document.getElementById('top').scrollIntoView(true);
     let wordArray = word.split('').map((letter, index) => {
       let color = 'Blue';
       if (this.state.selectedWords.length > 0) {
@@ -150,10 +151,15 @@ class Results extends Component {
         );
       });
 
+      const plural = this.props.words.length !== 1 ? 's' : null;
+
       count = (
         <React.Fragment>
           <p>
-            {this.props.words.length} possible solutions
+            {this.props.words.length} possible solution{plural}
+          </p>
+          <p className='subtext'>
+            <em>Note: Words at the top of the list have more unique letters, so they are better for narrowing down the solution</em>
           </p>
           <p>
             Select a word:
@@ -163,11 +169,15 @@ class Results extends Component {
     }
 
     let selected = this.state.selectedWords.map((wordArray, wordIndex) => {
+      let found = true;
       const letters = wordArray.map((letter, letterIndex) => {
         const id = makeId();
         let classes = 'letter-picker';
         if (wordIndex === this.state.selectedWords.length - 1) {
           classes += ' before-editing';
+        }
+        if (letter.color !== 'Green') {
+          found = false;
         }
         return (
           <div
@@ -185,6 +195,20 @@ class Results extends Component {
       if (wordIndex === this.state.selectedWords.length - 1) {
         remove = (
           <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveSelected()} title='Remove word' />
+        );
+      }
+      if (found) {
+        count = null;
+        results = (
+          <React.Fragment>
+            <p>
+              CONGRATULATIONS!
+            </p>
+            <p>
+              You found the correct word!
+            </p>
+            <button onClick={() => this.onStartOverClick()}>Start Over</button>
+          </React.Fragment>
         );
       }
       return (
@@ -252,7 +276,7 @@ class Results extends Component {
     }
 
     return (
-      <React.Fragment>
+      <div id='results'>
         <button onClick={() => this.onStartOverClick()}>Start Over</button>
         <ul id='selected-words'>
           {selected}
@@ -264,7 +288,7 @@ class Results extends Component {
         <ol className='results'>
           {results}
         </ol>
-      </React.Fragment>
+      </div>
     );
   }
 }

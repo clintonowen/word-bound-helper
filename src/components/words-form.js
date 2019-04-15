@@ -74,7 +74,7 @@ class WordsForm extends Component {
         ));
       }
       return (
-        <React.Fragment>
+        <div id='words-form'>
           <button onClick={() => this.onNavClick(0, true)}>Start Over</button>
           <br />
           <p>Select word length:</p>
@@ -96,7 +96,7 @@ class WordsForm extends Component {
               Continue
             </button>
           </form>
-        </React.Fragment>
+        </div>
       );
     }
   }

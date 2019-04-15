@@ -12,21 +12,15 @@ import './App.css';
 const VirtualizeSwipeableViews = bindKeyboard(virtualize(SwipeableViews));
 
 const styles = {
-  slide: {
-    backgroundColor: '#766E8E',
-    padding: 15,
-    minHeight: 100,
-    color: '#fff'
+  slide1: {
+    // backgroundColor: '#FEA900'
+  },
+  slide2: {
+    // backgroundColor: '#B3DC4A'
+  },
+  slide3: {
+    // backgroundColor: '#6AC0FF'
   }
-  // slide1: {
-  //   backgroundColor: '#FEA900'
-  // },
-  // slide2: {
-  //   backgroundColor: '#B3DC4A'
-  // },
-  // slide3: {
-  //   backgroundColor: '#6AC0FF'
-  // }
 };
 
 function slideRenderer (params) {
@@ -55,7 +49,7 @@ function slideRenderer (params) {
   }
 
   return (
-    <div className='slide-container' style={Object.assign({}, styles.slide, style)} key={key}>
+    <div className='slide-container' style={Object.assign({}, style)} key={key}>
       {component}
     </div>
   );
@@ -74,6 +68,7 @@ class App extends Component {
   render () {
     return (
       <React.Fragment>
+        <div id='top' />
         <VirtualizeSwipeableViews
           index={this.props.swipeIndex}
           onChangeIndex={this.handleChangeIndex}
