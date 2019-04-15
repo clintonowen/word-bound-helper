@@ -415,7 +415,6 @@ argyll
 arhats
 ariary
 aright
-arilli
 arisen
 arises
 arkose
@@ -1542,7 +1541,6 @@ cereal
 cering
 cerise
 cerium
-ceroid
 cervid
 cervix
 cesium
@@ -2312,7 +2310,6 @@ deiced
 deicer
 deices
 deific
-deinks
 deisms
 deists
 deject
@@ -2350,7 +2347,6 @@ demons
 demote
 demure
 demurs
-denars
 denary
 dengue
 denial
@@ -2533,7 +2529,6 @@ doable
 dobras
 docile
 docked
-docken
 docker
 docket
 doctor
@@ -2841,7 +2836,6 @@ eludes
 eluent
 eluted
 elutes
-elutor
 eluvia
 elvish
 emails

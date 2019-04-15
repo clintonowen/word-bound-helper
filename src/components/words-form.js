@@ -1,38 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, getFormValues, reset } from 'redux-form';
 import { updateSwipeIndex } from '../actions/app';
 import { setWordLength, setPossLetters, clearWords } from '../actions/words';
 import { makeId } from '../actions/utils';
 import './words-form.css';
 
 class WordsForm extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      possLetters: '',
+      wordLength: null
+    };
+  }
+
   onSubmit (event) {
     event.preventDefault();
+    this.onNavClick(2);
   }
 
   onNavClick (index, clear) {
-    const { wordLength } = this.props;
-    if (wordLength && this.props.values && this.props.values.possLetters && !clear) {
-      const possLetters = this.props.values.possLetters.replace(/[^a-zA-Z]+/g, '').toLowerCase().split('');
+    let { wordLength, possLetters } = this.state;
+    if (wordLength && possLetters && !clear) {
+      possLetters = possLetters.replace(/[^a-zA-Z]+/g, '').toLowerCase().split('');
       this.props.dispatch(setPossLetters(possLetters));
       this.props.dispatch(updateSwipeIndex(index));
     } else if (clear) {
       this.props.dispatch(updateSwipeIndex(index));
       this.props.dispatch(clearWords());
-      this.props.dispatch(reset('letters'));
     }
+    this.setState({
+      possLetters: '',
+      wordLength: null
+    });
   }
 
   onLengthClick (wordLength) {
+    this.setState({ wordLength });
     this.props.dispatch(setWordLength(wordLength));
+  }
+
+  setLetters (possLetters) {
+    this.setState({ possLetters });
   }
 
   render () {
     if (this.props.loading) {
       return (
         <p>
-          Loading...
+          Searching for possible words...
         </p>
       );
     } else {
@@ -58,26 +74,29 @@ class WordsForm extends Component {
         ));
       }
       return (
-        <React.Fragment>
+        <div id='words-form'>
           <button onClick={() => this.onNavClick(0, true)}>Start Over</button>
           <br />
           <p>Select word length:</p>
           {numbers}
-          <p>Enter available letters:</p>
           <form
             className='words-form'
             onSubmit={e => this.onSubmit(e)}
           >
-            <Field
-              id='possLetters'
-              label='Possible Letters'
-              component='input'
-              type='text'
-              name='possLetters'
+            <label htmlFor='possible-letters'>
+              Enter available letters:
+            </label>
+            <input type='text'
+              id='possible-letters'
+              value={this.state.possLetters}
+              onChange={e => this.setLetters(e.target.value)}
             />
+            <br />
+            <button disabled={!this.state.wordLength || !this.state.possLetters}>
+              Continue
+            </button>
           </form>
-          <button onClick={() => this.onNavClick(2)}>Continue</button>
-        </React.Fragment>
+        </div>
       );
     }
   }
@@ -86,10 +105,7 @@ class WordsForm extends Component {
 const mapStateToProps = state => ({
   loading: state.words.loading,
   wordLength: state.words.query.wordLength,
-  possLetters: state.words.query.possLetters,
-  values: getFormValues('letters')(state)
+  possLetters: state.words.query.possLetters
 });
 
-export default reduxForm({
-  form: 'letters'
-})(connect(mapStateToProps)(WordsForm));
+export default connect(mapStateToProps)(WordsForm);

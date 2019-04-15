@@ -262,7 +262,6 @@ affrays
 affront
 afghani
 afghans
-aflight
 aftmost
 against
 agamete
@@ -282,12 +281,9 @@ agility
 agitate
 agitpop
 agnatha
-agnosia
-agnosic
 agogics
 agonies
 agonise
-agonism
 agonist
 agonize
 aground
@@ -300,7 +296,6 @@ aimless
 airable
 airbags
 airbase
-airbeds
 airboat
 airborn
 aircell
@@ -314,7 +309,6 @@ airflow
 airfoil
 airgaps
 airglow
-airguns
 airhead
 airhole
 airiest
@@ -466,7 +460,6 @@ amercer
 amerces
 amiable
 amiably
-amidone
 ammeter
 ammines
 ammonia
@@ -545,7 +538,6 @@ animals
 animate
 animism
 animist
-animose
 anionic
 aniseed
 anklets
@@ -2088,7 +2080,6 @@ bursary
 bursate
 burying
 busboys
-busgirl
 bushbok
 bushels
 bushfly
@@ -2272,7 +2263,6 @@ cannoli
 cannolo
 cannons
 cannula
-canoers
 canonic
 canonry
 cantata
@@ -4233,7 +4223,6 @@ disgown
 disgust
 dishful
 dishing
-dishorn
 dishpan
 dishrag
 disject
@@ -4771,7 +4760,6 @@ elodeas
 elogies
 elogist
 elogium
-eloigns
 eloined
 elopers
 eloping
@@ -6872,7 +6860,6 @@ haulers
 hauling
 haunted
 haunter
-hauynes
 hawkers
 hawkeye
 hawking
@@ -7633,7 +7620,6 @@ ionones
 iophobe
 iotized
 iotizes
-iphones
 irately
 iratest
 irenics
@@ -7913,7 +7899,6 @@ kayaked
 kayaker
 kebayas
 keekers
-keeking
 keeling
 keenest
 keening
@@ -8391,7 +8376,6 @@ linseed
 lintels
 lintier
 lioness
-lionets
 lionise
 lionism
 lionize
@@ -9424,7 +9408,6 @@ nametag
 nannies
 nanobes
 nanobot
-nanodot
 nanogap
 nanogel
 nanoink
@@ -9628,7 +9611,6 @@ nonhero
 noniron
 nonjade
 nonjail
-nonjava
 nonjazz
 nonjews
 nonjobs
@@ -9642,7 +9624,6 @@ nonlate
 nonlazy
 nonlead
 nonleap
-nonliar
 nonlife
 nonlove
 nonlung
@@ -15066,7 +15047,6 @@ tallish
 tallows
 tallowy
 tallyho
-talonid
 taluses
 tamable
 tamales
@@ -15326,7 +15306,6 @@ thimble
 thinker
 thinned
 thinner
-thiones
 thirdly
 thirsts
 thirsty
@@ -15545,7 +15524,6 @@ toolkit
 toolman
 toolmen
 toolset
-toonies
 tooters
 toothed
 tooting
@@ -15943,7 +15921,6 @@ twizzle
 twizzly
 twofers
 twofold
-twonies
 twoonie
 twosome
 twostep

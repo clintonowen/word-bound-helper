@@ -10,7 +10,7 @@ class LandingPage extends Component {
 
   render () {
     return (
-      <div>
+      <div id='landing-page'>
         <h1>Word Bound Helper</h1>
         <button onClick={() => this.handleClick(1)}>New Level</button>
       </div>
