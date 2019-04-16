@@ -11,7 +11,22 @@ class LandingPage extends Component {
   render () {
     return (
       <div id='landing-page'>
-        <h1>Word Bound Helper</h1>
+        <h1>WORD</h1>
+        <div id='title-bound' className='title'>
+          <span className='pink'>B</span>
+          <span className='blue'>O</span>
+          <span className='orange'>U</span>
+          <span className='green'>N</span>
+          <span className='pink'>D</span>
+        </div>
+        <div id='title-helper' className='title'>
+          <span className='green'>H</span>
+          <span className='green'>E</span>
+          <span className='green'>L</span>
+          <span className='green'>P</span>
+          <span className='green'>E</span>
+          <span className='green'>R</span>
+        </div>
         <button onClick={() => this.handleClick(1)}>New Level</button>
       </div>
     );

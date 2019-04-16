@@ -99,7 +99,6 @@ actors
 actual
 acuate
 acuity
-aculei
 acumen
 acuter
 acutes
