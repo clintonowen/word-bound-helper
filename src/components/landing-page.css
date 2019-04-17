@@ -4,6 +4,7 @@
   font-size: 90px;
   line-height: 90px;
   margin: 0;
+  margin-top: 40px;
 }
 
 #landing-page span {
@@ -50,7 +51,7 @@
 }
 
 #title-helper {
-  margin-bottom: 20px;
+  margin-bottom: 80px;
 }
 
 #title-helper span {

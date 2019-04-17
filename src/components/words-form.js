@@ -73,7 +73,12 @@ class WordsForm extends Component {
       }
       return (
         <div id='words-form'>
-          <button onClick={() => this.onNavClick(0, true)}>Start Over</button>
+          <button
+            className='nav-button pink'
+            onClick={() => this.onNavClick(0, true)}
+          >
+            Start Over
+          </button>
           <br />
           <p>Select word length:</p>
           {numbers}
@@ -90,7 +95,10 @@ class WordsForm extends Component {
               onChange={e => this.setLetters(e.target.value)}
             />
             <br />
-            <button disabled={!this.state.wordLength || !this.state.possLetters}>
+            <button
+              className='nav-button green'
+              disabled={!this.state.wordLength || !this.state.possLetters}
+            >
               Continue
             </button>
           </form>
