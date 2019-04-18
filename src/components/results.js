@@ -31,7 +31,9 @@ class Results extends Component {
       startingIndex: 0
     });
     this.props.dispatch(updateSwipeIndex(index));
-    this.props.dispatch(clearWords());
+    if (index === 0) {
+      this.props.dispatch(clearWords());
+    }
   }
 
   handleSelectWord (word) {
@@ -294,9 +296,9 @@ class Results extends Component {
       <div id='results'>
         <button
           className='nav-button pink'
-          onClick={() => this.onNavClick(0)}
+          onClick={() => this.onNavClick(1)}
         >
-          Start Over
+          Back
         </button>
         {selectedList}
         {editing}

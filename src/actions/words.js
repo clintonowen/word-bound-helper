@@ -65,6 +65,8 @@ export const fetchWords = (query, selectedWords) => dispatch => {
     dispatch(fetchWordsError(err));
   }
 
+  possLetters = possLetters.replace(/[^a-zA-Z]+/g, '').toLowerCase().split('');
+
   // Check selected word history
   if (selectedWords && selectedWords.length !== 0) {
     // Check only last selected word for `corrLetters` and `corrPosition`

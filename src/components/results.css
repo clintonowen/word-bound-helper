@@ -4,10 +4,6 @@
   margin-top: 6px;
 }
 
-#results ol {
-  list-style-type: 
-}
-
 #results .subtext {
   font-size: 12px;
 }
@@ -50,6 +46,7 @@
 
 #list-length {
   color: #FFA141;
+  font-size: 24px;
   font-weight: bold;
 }
 
