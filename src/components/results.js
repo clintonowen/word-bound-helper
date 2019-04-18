@@ -27,7 +27,8 @@ class Results extends Component {
   onNavClick (index) {
     this.setState({
       editingWord: null,
-      selectedWords: []
+      selectedWords: [],
+      startingIndex: 0
     });
     this.props.dispatch(updateSwipeIndex(index));
     this.props.dispatch(clearWords());
@@ -73,7 +74,8 @@ class Results extends Component {
     const selectedWords = [...this.state.selectedWords, this.state.editingWord];
     this.setState({
       editingWord: null,
-      selectedWords
+      selectedWords,
+      startingIndex: 0
     });
     // Fetch an updated list of words
     this.props.dispatch(fetchWords(this.props.query, selectedWords));
