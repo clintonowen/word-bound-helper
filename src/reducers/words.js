@@ -12,7 +12,7 @@ const initialState = {
   loading: false,
   query: {
     wordLength: null,
-    possLetters: null
+    possLetters: ''
   },
   words: null
 };

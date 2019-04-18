@@ -1,0 +1,64 @@
+#landing-page h1 {
+  filter: drop-shadow(2px 2px 2px rgb(40, 40, 40));
+  -webkit-filter: drop-shadow(2px 2px 2px rgb(40, 40, 40));
+  font-size: 90px;
+  line-height: 90px;
+  margin: 0;
+  margin-top: 40px;
+}
+
+#landing-page span {
+  border-radius: 4px;
+  display: inline-block;
+  filter: drop-shadow(2px 2px 2px rgb(40, 40, 40));
+  -webkit-filter: drop-shadow(2px 2px 2px rgb(40, 40, 40));
+}
+
+#landing-page button {
+  background-color: #00C183;
+  border: 3px solid white;
+  border-radius: 30px;
+  color: white;
+  filter: drop-shadow(2px 2px 2px rgb(40, 40, 40));
+  -webkit-filter: drop-shadow(2px 2px 2px rgb(40, 40, 40));
+  font-size: 40px;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
+}
+
+#landing-page button:active,
+#landing-page button:focus,
+#landing-page button:hover {
+  filter: none;
+  -webkit-filter: none;
+  transform: translateX(2px) translateY(2px);
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
+}
+
+#title-bound {
+  margin-bottom: 4px;
+}
+
+#title-bound span {
+  font-size: 50px;
+  font-weight: bold;
+  height: 50px;
+  line-height: 50px;
+  margin: 1px;
+  width: 50px;
+}
+
+#title-helper {
+  margin-bottom: 80px;
+}
+
+#title-helper span {
+  font-size: 41px;
+  font-weight: bold;
+  height: 41px;
+  line-height: 41px;
+  margin: 1px;
+  width: 41px;
+}
