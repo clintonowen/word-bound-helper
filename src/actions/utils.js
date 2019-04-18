@@ -30,25 +30,25 @@ export const loadDictionary = (wordLength) => {
   let path;
 
   switch (wordLength) {
-    case '2':
+    case 2:
       path = '/data/dictionaries/2-letter.txt';
       break;
-    case '3':
+    case 3:
       path = '/data/dictionaries/3-letter.txt';
       break;
-    case '4':
+    case 4:
       path = '/data/dictionaries/4-letter.txt';
       break;
-    case '5':
+    case 5:
       path = '/data/dictionaries/5-letter.txt';
       break;
-    case '6':
+    case 6:
       path = '/data/dictionaries/6-letter.txt';
       break;
-    case '7':
+    case 7:
       path = '/data/dictionaries/7-letter.txt';
       break;
-    case '8':
+    case 8:
       path = '/data/dictionaries/8-letter.txt';
       break;
     default:

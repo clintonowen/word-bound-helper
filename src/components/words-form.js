@@ -54,21 +54,22 @@ class WordsForm extends Component {
     } else {
       let numbers = [];
       for (let i = 3; i <= 7; i++) {
-        let id = makeId();
+        const id = makeId();
         let color = 'Blue';
-        if (`${i}` === this.props.wordLength) {
+        if (i === this.props.wordLength) {
           color = 'Orange';
         }
+        const selected = color === 'Blue' ? 'Unselected' : 'Selected';
         numbers.push((
-          <div key={id} className='number-picker'>
-            <button
-              className={`number-option ${color.toLowerCase()}`}
-              onClick={() => this.onLengthClick(`${i}`)}
-              title={`${color} ${i}`}
-            >
-              {i}
-            </button>
-          </div>
+          <button
+            key={id}
+            className={`number-option ${color.toLowerCase()}`}
+            type='button'
+            onClick={() => this.onLengthClick(i)}
+            title={`${i} ${selected}`}
+          >
+            {i}
+          </button>
         ));
       }
       return (
@@ -80,12 +81,14 @@ class WordsForm extends Component {
             Start Over
           </button>
           <br />
-          <p>Select word length:</p>
-          {numbers}
           <form
             className='words-form'
             onSubmit={e => this.onSubmit(e)}
           >
+            <label>
+              Select word length:
+            </label>
+            {numbers}
             <label htmlFor='possible-letters'>
               Enter available letters:
             </label>
@@ -97,6 +100,7 @@ class WordsForm extends Component {
             <br />
             <button
               className='nav-button green'
+              type='submit'
               disabled={!this.state.wordLength || !this.state.possLetters}
             >
               Continue

@@ -1,10 +1,24 @@
+#results p {
+  font-size: 18px;
+  margin-bottom: 6px;
+  margin-top: 6px;
+}
+
+#results ol {
+  list-style-type: 
+}
+
+#results .subtext {
+  font-size: 12px;
+}
+
 #selected-words {
   list-style: none;
   padding-inline-start: 0px;
   margin-block-start: 0px;
   margin-block-end: 0px;
   margin-bottom: 30px;
-  margin-top: 30px;
+  margin-top: 20px;
   text-align: left;
 }
 
@@ -13,6 +27,7 @@
 }
 
 #editing-container {
+  margin-top: 20px;
   text-align: left;
 }
 
@@ -20,6 +35,22 @@
   background-color: #1F5760;
   display: inline-block;
   padding: 2px;
+}
+
+#editing-instructions {
+  font-size: 16px;
+  padding-inline-start: 16px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+#editing-instructions li {
+  margin-bottom: 8px;
+}
+
+#list-length {
+  color: #FFA141;
+  font-weight: bold;
 }
 
 .letters-container {
@@ -45,8 +76,6 @@
   border-radius: 4px;
   color: white;
   display: inline-block;
-  filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
-  -webkit-filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
   font-size: 29px;
   font-weight: bold;
   height: 30px;
@@ -61,15 +90,25 @@
   border: none;
   border-radius: 4px;
   color: white;
-  filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
-  -webkit-filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
+  filter: drop-shadow(1px 1px 1px #222222);
+  -webkit-filter: drop-shadow(1px 1px 1px #222222);
   font-size: 29px;
   font-weight: bold;
   height: 30px;
   line-height: 30px;
   margin: 2px;
   padding: 0;
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
   width: 30px;
+}
+
+.letter-button:active,
+.letter-button:focus,
+.letter-button:hover {
+  filter: none;
+  -webkit-filter: none;
+  transform: translateX(1px) translateY(1px);
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
 }
 
 .letter-option {
@@ -94,26 +133,27 @@
   left: 16px;
 }
 
-.results {
-  margin-top: 24px;
-  padding-inline-start: 0;
-}
-
-.results > li {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100px;
-}
-
 .remove-button {
   background: none;
   background-image: url('/img/minus-button.png');
   border: none;
+  filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
   height: 30px;
   margin-left: 8px;
   position: relative;
   top: 2px;
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
   width: 30px;
+}
+
+.remove-button:active,
+.remove-button:focus,
+.remove-button:hover {
+  filter: none;
+  -webkit-filter: none;
+  transform: translateX(1px) translateY(1px);
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
 }
 
 #selected-words .remove-button {
@@ -124,13 +164,74 @@
   background: none;
   background-image: url('/img/plus-button.png');
   border: none;
+  filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
   height: 30px;
   margin-left: 10px;
   position: relative;
   top: 2px;
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
   width: 30px;
 }
 
-.subtext {
-  font-size: 0.70em;
+.add-button:active,
+.add-button:focus,
+.add-button:hover {
+  filter: none;
+  -webkit-filter: none;
+  transform: translateX(1px) translateY(1px);
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
+}
+
+.results {
+  margin-top: 10px;
+  padding-inline-start: 0;
+}
+
+.results > li {
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+}
+
+.word-button {
+  border: 1px solid white;
+  border-radius: 4px;
+  color: white;
+  filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
+}
+
+.word-button:active,
+.word-button:focus,
+.word-button:hover {
+  filter: none;
+  -webkit-filter: none;
+  transform: translateX(1px) translateY(1px);
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
+}
+
+.results-nav {
+  border: 1px solid white;
+  border-radius: 4px;
+  color: white;
+  filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
+  font-size: 14px;
+  font-weight: bold;
+  margin: 2px;
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
+}
+
+.results-nav:active,
+.results-nav:focus,
+.results-nav:hover {
+  filter: none;
+  -webkit-filter: none;
+  transform: translateX(1px) translateY(1px);
+  transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
 }

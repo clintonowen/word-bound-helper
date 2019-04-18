@@ -10,7 +10,8 @@ class Results extends Component {
     super(props);
     this.state = {
       editingWord: null,
-      selectedWords: []
+      selectedWords: [],
+      startingIndex: 0
     };
   }
 
@@ -23,12 +24,12 @@ class Results extends Component {
     }
   }
 
-  onStartOverClick () {
+  onNavClick (index) {
     this.setState({
       editingWord: null,
       selectedWords: []
     });
-    this.props.dispatch(updateSwipeIndex(0));
+    this.props.dispatch(updateSwipeIndex(index));
     this.props.dispatch(clearWords());
   }
 
@@ -119,8 +120,20 @@ class Results extends Component {
     });
   }
 
+  handlePrevClick () {
+    const startingIndex = this.state.startingIndex - 10;
+    this.setState({ startingIndex });
+  }
+
+  handleNextClick () {
+    const startingIndex = this.state.startingIndex + 10;
+    this.setState({ startingIndex });
+  }
+
   render () {
+    let selectedList;
     let results;
+    let resultsNav;
     let count;
     if (this.props.loading) {
       results = (
@@ -130,7 +143,7 @@ class Results extends Component {
       );
     } else if (this.state.editingWord) {
       results = (
-        <ol>
+        <ol id='editing-instructions'>
           <li>
             Click the letters in the word above to set their color.
           </li>
@@ -140,30 +153,53 @@ class Results extends Component {
         </ol>
       );
     } else if (this.props.words && this.props.words.length > 0) {
-      results = this.props.words.map(word => {
-        const id = makeId();
-        return (
-          <li key={id}>
-            <button onClick={() => this.handleSelectWord(word)}>
-              {word}
-            </button>
-          </li>
-        );
-      });
-
+      results = [];
+      const start = this.state.startingIndex;
+      for (let i = start; i < start + 10; i++) {
+        if (this.props.words[i]) {
+          const id = makeId();
+          results.push(
+            <li key={id}>
+              <button
+                className='word-button blue'
+                onClick={() => this.handleSelectWord(this.props.words[i])}
+              >
+                {this.props.words[i]}
+              </button>
+            </li>
+          );
+        }
+      }
       const plural = this.props.words.length !== 1 ? 's' : null;
-
       count = (
         <React.Fragment>
           <p>
-            {this.props.words.length} possible solution{plural}
-          </p>
-          <p className='subtext'>
-            <em>Note: Words at the top of the list have more unique letters, so they are better for narrowing down the solution</em>
+            <span id='list-length'>{this.props.words.length}</span> possible solution{plural}
           </p>
           <p>
             Select a word:
           </p>
+          <p className='subtext'>
+            <em>Note: Words at the top of the list have more unique letters, so they are better for narrowing down the solution</em>
+          </p>
+        </React.Fragment>
+      );
+      resultsNav = (
+        <React.Fragment>
+          <button
+            className='results-nav pink'
+            onClick={() => this.handlePrevClick()}
+            disabled={this.state.startingIndex === 0}
+          >
+            Prev
+          </button>
+          <button
+            className='results-nav pink'
+            onClick={() => this.handleNextClick()}
+            disabled={this.state.startingIndex + 10 >= this.props.words.length}
+          >
+            Next
+          </button>
         </React.Fragment>
       );
     } else {
@@ -174,55 +210,69 @@ class Results extends Component {
       );
     }
 
-    let selected = this.state.selectedWords.map((wordArray, wordIndex) => {
-      let found = true;
-      const letters = wordArray.map((letter, letterIndex) => {
-        const id = makeId();
-        if (letter.color !== 'Green') {
-          found = false;
+    if (this.state.selectedWords.length > 0) {
+      let selected = this.state.selectedWords.map((wordArray, wordIndex) => {
+        let found = true;
+        const letters = wordArray.map((letter, letterIndex) => {
+          const id = makeId();
+          if (letter.color !== 'Green') {
+            found = false;
+          }
+          return (
+            <span
+              key={id}
+              className={`letter-image ${letter.color.toLowerCase()}`}
+            >
+              {letter.letter.toUpperCase()}
+            </span>
+          );
+        });
+        let remove;
+        if (wordIndex === this.state.selectedWords.length - 1) {
+          remove = (
+            <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveSelected()} title='Remove word' />
+          );
+        }
+        let contClasses = 'letters-container';
+        if (wordIndex !== this.state.selectedWords.length - 1) {
+          contClasses += ' not-last';
+        }
+        if (found) {
+          count = null;
+          results = (
+            <React.Fragment>
+              <p>
+                CONGRATULATIONS!
+              </p>
+              <p>
+                You found the correct word!
+              </p>
+              <button
+                className='nav-button pink'
+                onClick={() => this.onNavClick(0)}
+              >
+                Start Over
+              </button>
+            </React.Fragment>
+          );
+          resultsNav = null;
         }
         return (
-          <span
-            key={id}
-            className={`letter-image ${letter.color.toLowerCase()}`}
-          >
-            {letter.letter.toUpperCase()}
-          </span>
+          <li key={makeId()}>
+            <div className={contClasses}>
+              {letters}
+            </div>
+            {remove}
+          </li>
         );
       });
-      let remove;
-      if (wordIndex === this.state.selectedWords.length - 1) {
-        remove = (
-          <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveSelected()} title='Remove word' />
-        );
-      }
-      let contClasses = 'letters-container';
-      if (wordIndex !== this.state.selectedWords.length - 1) {
-        contClasses += ' not-last';
-      }
-      if (found) {
-        count = null;
-        results = (
-          <React.Fragment>
-            <p>
-              CONGRATULATIONS!
-            </p>
-            <p>
-              You found the correct word!
-            </p>
-            <button onClick={() => this.onStartOverClick()}>Start Over</button>
-          </React.Fragment>
-        );
-      }
-      return (
-        <li key={makeId()}>
-          <div className={contClasses}>
-            {letters}
-          </div>
-          {remove}
-        </li>
+
+      selectedList = (
+        <ul id='selected-words'>
+          {selected}
+        </ul>
       );
-    });
+    }
 
     let editingButtons;
     if (this.state.editingWord) {
@@ -289,15 +339,19 @@ class Results extends Component {
 
     return (
       <div id='results'>
-        <button onClick={() => this.onStartOverClick()}>Start Over</button>
-        <ul id='selected-words'>
-          {selected}
-        </ul>
+        <button
+          className='nav-button pink'
+          onClick={() => this.onNavClick(0)}
+        >
+          Start Over
+        </button>
+        {selectedList}
         {editing}
         {count}
-        <ol className='results'>
+        <ol start={`${this.state.startingIndex + 1}`} className='results'>
           {results}
         </ol>
+        {resultsNav}
       </div>
     );
   }
