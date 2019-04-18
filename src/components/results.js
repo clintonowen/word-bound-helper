@@ -45,8 +45,7 @@ class Results extends Component {
       }
       return {
         letter,
-        color,
-        showOptions: 'hidden'
+        color
       };
     });
     this.setState({
@@ -80,35 +79,21 @@ class Results extends Component {
     this.props.dispatch(fetchWords(this.props.query, selectedWords));
   }
 
-  handleToggleOptions (letterIndex) {
-    // Hide options for all letters
-    let editingWord = this.state.editingWord.map(letter => {
-      return Object.assign({}, letter, {
-        showOptions: 'hidden'
-      });
-    });
-    // If options were hidden for selected letter, make them visible
-    let currentSetting = this.state.editingWord[letterIndex].showOptions;
-    if (currentSetting === 'hidden') {
-      const letter = Object.assign({}, this.state.editingWord[letterIndex], {
-        showOptions: 'visible'
-      });
-      // Reinsert toggled letter into parent word
-      editingWord = (letterIndex > 0)
-        ? editingWord.slice(0, letterIndex).concat(letter).concat(editingWord.slice(letterIndex + 1))
-        : [letter].concat(editingWord.slice(1));
+  handleCycleColor (currentColor, letterIndex) {
+    let color;
+    switch (currentColor) {
+      case 'Blue':
+        color = 'Orange';
+        break;
+      case 'Orange':
+        color = 'Green';
+        break;
+      default:
+        color = 'Blue';
     }
-    // Assign updated `selectedWords` to state
-    this.setState({
-      editingWord
-    });
-  }
-
-  handleSelectColor (color, letterIndex) {
     // Set new letter color
     const letter = Object.assign({}, this.state.editingWord[letterIndex], {
-      color,
-      showOptions: 'hidden'
+      color
     });
     // Reinsert letter into `editingWord`
     const editingWord = (letterIndex > 0)
@@ -277,49 +262,15 @@ class Results extends Component {
     let editingButtons;
     if (this.state.editingWord) {
       editingButtons = this.state.editingWord.map((letter, letterIndex) => {
-        const colors = ['Blue', 'Orange', 'Green'].filter(color => {
-          return color !== letter.color;
-        });
-        const colorOption1 = `${colors[0].toLowerCase()}`;
-        const colorOption2 = `${colors[1].toLowerCase()}`;
-        const options = (
-          <React.Fragment>
-            <button
-              onClick={() => this.handleSelectColor(colors[0], letterIndex)}
-              className={`letter-option letter-option-left ${colorOption1}`}
-              title={`${colors[0]} ${letter.letter.toUpperCase()}`}
-              style={{
-                visibility: `${letter.showOptions}`
-              }}
-            >
-              {letter.letter.toUpperCase()}
-            </button>
-            <button
-              onClick={() => this.handleSelectColor(colors[1], letterIndex)}
-              className={`letter-option letter-option-right ${colorOption2}`}
-              title={`${colors[1]} ${letter.letter.toUpperCase()}`}
-              style={{
-                visibility: `${letter.showOptions}`
-              }}
-            >
-              {letter.letter.toUpperCase()}
-            </button>
-          </React.Fragment>
-        );
         return (
-          <div
+          <button
             key={makeId()}
-            className='letter-picker'
+            onClick={() => this.handleCycleColor(letter.color, letterIndex)}
+            className={`letter-button ${letter.color.toLowerCase()}`}
+            title={`${letter.color} ${letter.letter.toUpperCase()}`}
           >
-            <button
-              onClick={() => this.handleToggleOptions(letterIndex)}
-              className={`letter-button ${letter.color.toLowerCase()}`}
-              title={`${letter.color} ${letter.letter.toUpperCase()}`}
-            >
-              {letter.letter.toUpperCase()}
-            </button>
-            {options}
-          </div>
+            {letter.letter.toUpperCase()}
+          </button>
         );
       });
     }
