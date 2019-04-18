@@ -286,8 +286,10 @@ class Results extends Component {
           <div id='editing-buttons'>
             {editingButtons}
           </div>
-          <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveEditing()} title='Remove word' />
-          <button className='add-button' key={makeId()} onClick={() => this.handleClickAdd()} title='Add word' />
+          <div id='add-remove'>
+            <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveEditing()} title='Remove word' />
+            <button className='add-button' key={makeId()} onClick={() => this.handleClickAdd()} title='Add word' />
+          </div>
         </div>
       );
     }

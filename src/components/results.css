@@ -2,6 +2,7 @@
   font-size: 18px;
   margin-bottom: 6px;
   margin-top: 6px;
+  width: 100%;
 }
 
 #results .subtext {
@@ -23,19 +24,30 @@
 }
 
 #editing-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
   margin-top: 30px;
   text-align: left;
 }
 
 #editing-buttons {
   background-color: #1F5760;
-  display: inline-block;
+  flex: 1;
   padding: 2px;
+  margin-bottom: 4px;
+  max-height: fit-content;
+  max-width: fit-content;
+  min-width: fit-content;
+}
+
+#add-remove {
+  flex: 1;
 }
 
 #editing-instructions {
   font-size: 16px;
-  padding-inline-start: 16px;
+  padding-inline-start: 20px;
   margin-top: 20px;
   text-align: left;
 }
@@ -105,6 +117,7 @@
   filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
   -webkit-filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
   height: 30px;
+  margin-bottom: 6px;
   margin-left: 8px;
   position: relative;
   top: 2px;
@@ -132,7 +145,7 @@
   filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
   -webkit-filter: drop-shadow(1px 1px 1px rgb(40, 40, 40));
   height: 30px;
-  margin-left: 10px;
+  margin-left: 8px;
   position: relative;
   top: 2px;
   transition: all 0.2s cubic-bezier(0, 0, 0.25, 1);
