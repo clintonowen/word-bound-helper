@@ -8,7 +8,7 @@
 ## [Live App](https://word-bound-helper.herokuapp.com/)
 <!-- ( Test Account: &nbsp; **testuser** &nbsp; / &nbsp; **password** ) -->
 
-This is a tool to help solve word puzzles for the popluar iOS and Android game, Word Bound.
+This is a tool to help solve word puzzles for the popular iOS and Android game, Word Bound.
 
 <!-- ![](images/screenshot-5.png) -->
 
