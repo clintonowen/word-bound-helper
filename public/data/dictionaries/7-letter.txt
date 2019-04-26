@@ -4131,7 +4131,6 @@ diggers
 digging
 digicam
 digital
-diglyph
 dignify
 dignity
 digoxin
@@ -5084,7 +5083,6 @@ etymons
 euaster
 euclase
 eudemon
-eudicot
 eugenic
 eunuchs
 euonyms

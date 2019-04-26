@@ -251,7 +251,9 @@ class Results extends Component {
             <div className={contClasses}>
               {letters}
             </div>
-            {remove}
+            <div className='remove-selected'>
+              {remove}
+            </div>
           </li>
         );
       });
@@ -287,8 +289,8 @@ class Results extends Component {
             {editingButtons}
           </div>
           <div id='add-remove'>
-            <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveEditing()} title='Remove word' />
             <button className='add-button' key={makeId()} onClick={() => this.handleClickAdd()} title='Add word' />
+            <button className='remove-button' key={makeId()} onClick={() => this.handleClickRemoveEditing()} title='Remove word' />
           </div>
         </div>
       );
